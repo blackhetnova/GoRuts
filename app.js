@@ -356,6 +356,53 @@ function logoutUser() {
   openLoginModal();
 }
 
+// Interactive Modal Handlers for Drawer Buttons
+function openFavouritesModal() { document.getElementById('favouritesModal')?.classList.add('open'); }
+function closeFavouritesModal() { document.getElementById('favouritesModal')?.classList.remove('open'); }
+
+function openComplaintModal() { document.getElementById('complaintModal')?.classList.add('open'); }
+function closeComplaintModal() { document.getElementById('complaintModal')?.classList.remove('open'); }
+function submitComplaint() {
+  const text = document.getElementById('complaintText')?.value;
+  if (!text || text.trim() === '') {
+    showToast("Please enter grievance details!");
+    return;
+  }
+  const refNo = "SMC-GRIEV-" + Math.floor(100000 + Math.random() * 900000);
+  closeComplaintModal();
+  showToast("✅ Grievance Registered! Ref: " + refNo);
+}
+
+function openFeedbackModal() { document.getElementById('feedbackModal')?.classList.add('open'); }
+function closeFeedbackModal() { document.getElementById('feedbackModal')?.classList.remove('open'); }
+function setStarRating(stars) {
+  const row = document.getElementById('starRatingRow');
+  if (row) {
+    const iconList = row.querySelectorAll('i');
+    iconList.forEach((icon, idx) => {
+      if (idx < stars) {
+        icon.className = 'fas fa-star';
+      } else {
+        icon.className = 'far fa-star';
+      }
+    });
+  }
+  showToast("Rated " + stars + " Stars!");
+}
+function submitFeedback() {
+  closeFeedbackModal();
+  showToast("🎉 Thank you for your valuable feedback!");
+}
+
+function openContactModal() { document.getElementById('contactModal')?.classList.add('open'); }
+function closeContactModal() { document.getElementById('contactModal')?.classList.remove('open'); }
+
+function openTermsModal() { document.getElementById('termsModal')?.classList.add('open'); }
+function closeTermsModal() { document.getElementById('termsModal')?.classList.remove('open'); }
+
+function openPrivacyModal() { document.getElementById('privacyModal')?.classList.add('open'); }
+function closePrivacyModal() { document.getElementById('privacyModal')?.classList.remove('open'); }
+
 // Dark Mode Toggle
 function toggleDarkMode() {
   const isDark = document.body.getAttribute('data-theme') === 'dark';

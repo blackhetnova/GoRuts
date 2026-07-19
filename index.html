@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=21">
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +56,7 @@
         <span>Near you</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Added to Favourites')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openFavouritesModal()">
         <i class="far fa-star"></i>
         <span>Favourites</span>
       </button>
@@ -71,12 +71,12 @@
         <span>Transaction History</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('SMC Grievance Helpline: 1800 233 0294')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openComplaintModal()">
         <i class="far fa-comment-dots"></i>
         <span>Complaint</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Thank you for rating Surat BRTS!')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openFeedbackModal()">
         <i class="far fa-comments"></i>
         <span>Feedback</span>
       </button>
@@ -91,17 +91,17 @@
         <span>Change Language</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('BRTS Control Room: 0261-2423751')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openContactModal()">
         <i class="fas fa-phone-alt"></i>
         <span>Contact Us</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Surat Municipal Corporation Terms 2026')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openTermsModal()">
         <i class="far fa-newspaper"></i>
         <span>Terms and Condition</span>
       </button>
 
-      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Surat Smart City Privacy Policy')">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); openPrivacyModal()">
         <i class="far fa-shield-alt"></i>
         <span>Privacy Policy</span>
       </button>
@@ -713,7 +713,6 @@
         <i class="fas fa-sync fa-spin"></i> Awaiting Gate Scan...
       </div>
     </div>
-    <button class="qr-modal-close" onclick="closeFullQR()"><i class="fas fa-times-circle"></i></button>
   <!-- User Profile / Login Modal -->
   <div class="qr-modal" id="loginModal" onclick="closeLoginModal()">
     <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:340px; text-align:left; padding:22px;">
@@ -735,6 +734,156 @@
       </div>
     </div>
     <button class="qr-modal-close" onclick="closeLoginModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Favourites Modal -->
+  <div class="qr-modal" id="favouritesModal" onclick="closeFavouritesModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="far fa-star" style="color:var(--primary)"></i> Saved Favourites</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:16px">Quick access to your frequently traveled BRTS routes & stations</p>
+      
+      <div id="favouritesListContainer" style="max-height:260px; overflow-y:auto; margin-bottom:16px">
+        <div class="recent-booking-card" onclick="rebookRoute('Simada Junction BRTS', 'Nana Varachha BRTS'); closeFavouritesModal();">
+          <div class="recent-info">
+            <div class="recent-route"><span>Simada Junction</span> <i class="fas fa-arrow-right" style="font-size:10px; color:var(--primary)"></i> <span>Nana Varachha</span></div>
+            <div class="recent-date">Frequent Route | Line 12U</div>
+          </div>
+          <i class="fas fa-chevron-right" style="color:var(--text-secondary); font-size:12px"></i>
+        </div>
+        <div class="recent-booking-card" onclick="rebookRoute('Railway Station BRTS', 'Sarthana BRTS'); closeFavouritesModal();">
+          <div class="recent-info">
+            <div class="recent-route"><span>Railway Station</span> <i class="fas fa-arrow-right" style="font-size:10px; color:var(--primary)"></i> <span>Sarthana</span></div>
+            <div class="recent-date">Frequent Route | Line 5</div>
+          </div>
+          <i class="fas fa-chevron-right" style="color:var(--text-secondary); font-size:12px"></i>
+        </div>
+      </div>
+
+      <button class="show-route-btn" style="border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="closeFavouritesModal()">
+        Done
+      </button>
+    </div>
+    <button class="qr-modal-close" onclick="closeFavouritesModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Complaint Modal -->
+  <div class="qr-modal" id="complaintModal" onclick="closeComplaintModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="far fa-comment-dots" style="color:var(--primary)"></i> Submit Complaint</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:16px">Surat Municipal Corporation Grievance Redressal Portal</p>
+      
+      <div style="margin-bottom:12px">
+        <label style="font-size:11px; color:#666; font-weight:500; display:block; margin-bottom:4px">ISSUE TYPE</label>
+        <select id="complaintType" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:13px; color:#333">
+          <option>Bus Delay / Timetable Issue</option>
+          <option>Smart Entry Gate Issue</option>
+          <option>Ticket / Payment Issue</option>
+          <option>Driver / Conductor Conduct</option>
+          <option>Station Cleanliness</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="font-size:11px; color:#666; font-weight:500; display:block; margin-bottom:4px">DESCRIPTION</label>
+        <textarea id="complaintText" placeholder="Describe your grievance details..." style="width:100%; height:80px; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:13px; font-family:inherit; color:#333"></textarea>
+      </div>
+
+      <div style="display:flex; gap:10px">
+        <button class="trip-action-btn outline" style="flex:1; border-radius:8px !important; font-weight:500 !important;" onclick="closeComplaintModal()">
+          Cancel
+        </button>
+        <button class="show-route-btn" style="flex:1; border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="submitComplaint()">
+          Submit Grievance
+        </button>
+      </div>
+    </div>
+    <button class="qr-modal-close" onclick="closeComplaintModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="qr-modal" id="feedbackModal" onclick="closeFeedbackModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="far fa-comments" style="color:var(--primary)"></i> Service Feedback</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:14px">Help SMC improve Surat BRTS bus transit experience</p>
+      
+      <div style="text-align:center; margin-bottom:16px">
+        <div style="font-size:24px; color:#ffb703; cursor:pointer" id="starRatingRow">
+          <i class="fas fa-star" onclick="setStarRating(1)"></i>
+          <i class="fas fa-star" onclick="setStarRating(2)"></i>
+          <i class="fas fa-star" onclick="setStarRating(3)"></i>
+          <i class="fas fa-star" onclick="setStarRating(4)"></i>
+          <i class="fas fa-star" onclick="setStarRating(5)"></i>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <textarea id="feedbackText" placeholder="Write feedback comments..." style="width:100%; height:70px; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:13px; font-family:inherit; color:#333"></textarea>
+      </div>
+
+      <button class="show-route-btn" style="border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="submitFeedback()">
+        Send Feedback
+      </button>
+    </div>
+    <button class="qr-modal-close" onclick="closeFeedbackModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Contact Us Modal -->
+  <div class="qr-modal" id="contactModal" onclick="closeContactModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="fas fa-phone-alt" style="color:var(--primary)"></i> Contact Support</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:16px">Surat Municipal Corporation BRTS Helpline</p>
+      
+      <div style="font-size:13px; color:#333; line-height:1.6; margin-bottom:18px">
+        <div style="margin-bottom:10px"><strong>📞 Toll-Free Helpline:</strong><br><a href="tel:18002330294" style="color:var(--primary); font-weight:600; text-decoration:none">1800 233 0294</a></div>
+        <div style="margin-bottom:10px"><strong>🏢 BRTS Control Room:</strong><br><a href="tel:02612423751" style="color:var(--primary); font-weight:600; text-decoration:none">0261-2423751</a></div>
+        <div style="margin-bottom:10px"><strong>✉️ Support Email:</strong><br>sitilink@suratmunicipal.gov.in</div>
+        <div><strong>📍 Address:</strong><br>SMC Main Office, Muglisara, Surat - 395003</div>
+      </div>
+
+      <button class="show-route-btn" style="border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="closeContactModal()">
+        Close
+      </button>
+    </div>
+    <button class="qr-modal-close" onclick="closeContactModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Terms and Condition Modal -->
+  <div class="qr-modal" id="termsModal" onclick="closeTermsModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="far fa-newspaper" style="color:var(--primary)"></i> Terms & Conditions</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:14px">Surat BRTS Digital Ticketing Guidelines 2026</p>
+      
+      <div style="max-height:220px; overflow-y:auto; font-size:12px; color:#444; line-height:1.6; margin-bottom:16px; padding-right:6px">
+        <p style="margin-bottom:8px">1. Digital QR tickets issued via Sitilink/GoRutes are valid for 2 hours from ticket issuance time.</p>
+        <p style="margin-bottom:8px">2. Passengers must scan the QR code at the station smart entry gate before boarding the bus.</p>
+        <p style="margin-bottom:8px">3. Suman Pravas passes allow unlimited rides across all Surat BRTS lines until 10:00 PM on purchase date.</p>
+        <p style="margin-bottom:8px">4. Tickets are non-transferable and must be presented to ticket inspectors upon request.</p>
+      </div>
+
+      <button class="show-route-btn" style="border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="closeTermsModal()">
+        I Accept
+      </button>
+    </div>
+    <button class="qr-modal-close" onclick="closeTermsModal()"><i class="fas fa-times-circle"></i></button>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="qr-modal" id="privacyModal" onclick="closePrivacyModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:360px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600"><i class="far fa-shield-alt" style="color:var(--primary)"></i> Privacy Policy</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:14px">Surat Smart City Development Ltd. Data Policy</p>
+      
+      <div style="max-height:220px; overflow-y:auto; font-size:12px; color:#444; line-height:1.6; margin-bottom:16px; padding-right:6px">
+        <p style="margin-bottom:8px">1. All passenger travel preferences and ticketing history are stored locally on your device for fast offline access.</p>
+        <p style="margin-bottom:8px">2. No personal location data is tracked or transmitted to external third-party servers.</p>
+        <p style="margin-bottom:8px">3. Contactless payment transactions are encrypted using official UPI QR & Bank standards.</p>
+      </div>
+
+      <button class="show-route-btn" style="border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="closePrivacyModal()">
+        Got It
+      </button>
+    </div>
+    <button class="qr-modal-close" onclick="closePrivacyModal()"><i class="fas fa-times-circle"></i></button>
   </div>
 
   <!-- Core Javascript Libs and Logic -->
