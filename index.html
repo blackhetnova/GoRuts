@@ -317,92 +317,171 @@
   <div class="page" id="page-map">
     <div class="header">
       <button class="header-action" onclick="toggleMenu(true)"><i class="fas fa-bars"></i></button>
-      <h1>Transit Network Map</h1>
+      <h1>Surat BRTS Map</h1>
       <div style="width:36px"></div>
     </div>
 
     <div class="map-canvas-container">
-      <!-- SVG Network Representation of Surat BRTS -->
-      <svg class="map-svg" viewBox="0 0 300 400" id="transitMapSvg">
-        <!-- Background grid details -->
-        <g stroke="#eaeaea" stroke-width="0.5" opacity="0.3">
-          <line x1="0" y1="50" x2="300" y2="50" />
-          <line x1="0" y1="100" x2="300" y2="100" />
-          <line x1="0" y1="150" x2="300" y2="150" />
-          <line x1="0" y1="200" x2="300" y2="200" />
-          <line x1="0" y1="250" x2="300" y2="250" />
-          <line x1="0" y1="300" x2="300" y2="300" />
-          <line x1="0" y1="350" x2="300" y2="350" />
-          <line x1="50" y1="0" x2="50" y2="400" />
-          <line x1="100" y1="0" x2="100" y2="400" />
-          <line x1="150" y1="0" x2="150" y2="400" />
-          <line x1="200" y1="0" x2="200" y2="400" />
-          <line x1="250" y1="0" x2="250" y2="400" />
+      <!-- Comprehensive SVG Network Map of Surat BRTS -->
+      <svg class="map-svg" viewBox="0 0 500 750" id="transitMapSvg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background subtle grid -->
+        <g stroke="#eaeaea" stroke-width="0.3" opacity="0.15">
+          <line x1="0" y1="50" x2="500" y2="50" /><line x1="0" y1="100" x2="500" y2="100" />
+          <line x1="0" y1="150" x2="500" y2="150" /><line x1="0" y1="200" x2="500" y2="200" />
+          <line x1="0" y1="250" x2="500" y2="250" /><line x1="0" y1="300" x2="500" y2="300" />
+          <line x1="0" y1="350" x2="500" y2="350" /><line x1="0" y1="400" x2="500" y2="400" />
+          <line x1="0" y1="450" x2="500" y2="450" /><line x1="0" y1="500" x2="500" y2="500" />
+          <line x1="0" y1="550" x2="500" y2="550" /><line x1="0" y1="600" x2="500" y2="600" />
+          <line x1="0" y1="650" x2="500" y2="650" /><line x1="0" y1="700" x2="500" y2="700" />
+          <line x1="50" y1="0" x2="50" y2="750" /><line x1="100" y1="0" x2="100" y2="750" />
+          <line x1="150" y1="0" x2="150" y2="750" /><line x1="200" y1="0" x2="200" y2="750" />
+          <line x1="250" y1="0" x2="250" y2="750" /><line x1="300" y1="0" x2="300" y2="750" />
+          <line x1="350" y1="0" x2="350" y2="750" /><line x1="400" y1="0" x2="400" y2="750" />
+          <line x1="450" y1="0" x2="450" y2="750" />
         </g>
-        
-        <!-- Network Connection lines -->
-        <!-- Line A: Jahangirpura -> Adajan Patiya -> Railway Station -> Simada Junction -> Sarthana -->
-        <path d="M 50 40 L 50 120 L 150 120 L 250 120 L 250 40" class="map-route-line" id="lineA" />
-        
-        <!-- Line B: Sayan -> Railway Station -> Textile Market -> Udhana -> Bhestan -->
-        <path d="M 150 40 L 150 120 L 150 200 L 150 280 L 150 360" class="map-route-line" id="lineB" />
 
-        <!-- Line C: Airport -> Y Junction -> Althan -> Bhestan -->
-        <path d="M 50 360 L 50 280 L 100 280 L 150 280" class="map-route-line" id="lineC" />
+        <!-- Corridor Lines -->
+        <path d="M 250 680 L 250 620 L 250 540 L 320 540 L 390 540 L 390 470 L 390 400 L 390 330 L 390 260 L 390 190 L 390 120 L 390 60" stroke="#E53935" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor1"/>
+        <path d="M 60 60 L 60 130 L 60 200 L 110 200 L 170 200 L 250 200 L 250 260 L 250 330 L 250 400 L 320 400 L 390 400" stroke="#1E88E5" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor2"/>
+        <path d="M 110 680 L 110 620 L 110 540 L 170 470 L 250 400 L 250 330 L 250 260 L 250 200 L 320 140 L 390 60" stroke="#43A047" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor3"/>
+        <path d="M 60 540 L 110 540 L 170 470 L 170 400 L 170 330 L 250 330 L 250 260" stroke="#FB8C00" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor4"/>
+        <path d="M 60 400 L 110 400 L 170 400 L 250 400 L 250 470 L 250 540" stroke="#8E24AA" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor5"/>
+        <path d="M 390 680 L 390 620 L 390 540 L 320 540 L 250 540 L 250 620 L 250 680" stroke="#00897B" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8" id="corridor6"/>
 
-        <!-- Route overlay representing dynamic trip path -->
         <path d="" class="map-route-line active" id="activeTripLine" stroke-dasharray="8,6" stroke-dashoffset="0" />
 
-        <!-- Stations as Nodes -->
-        <!-- Row 1 -->
-        <circle cx="50" cy="40" r="5" class="map-station" id="station-Jahangirpura" onclick="selectMapStation('Jahangirpura BRTS')" />
-        <text x="50" y="30" class="map-station-label" text-anchor="middle">Jahangirpura</text>
+        <!-- Stations -->
+        <circle cx="60" cy="60" r="7" class="map-station map-terminal" id="station-Jahangirpura" onclick="selectMapStation('Jahangirpura BRTS')" />
+        <text x="60" y="38" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:9px;fill:#1E88E5">Jahangirpura</text>
 
-        <circle cx="150" cy="40" r="5" class="map-station" id="station-Sayan" onclick="selectMapStation('Sayan BRTS')" />
-        <text x="150" y="30" class="map-station-label" text-anchor="middle">Sayan</text>
+        <circle cx="390" cy="60" r="7" class="map-station map-terminal" id="station-Sarthana" onclick="selectMapStation('Sarthana BRTS')" />
+        <text x="390" y="38" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:9px;fill:#E53935">Sarthana</text>
 
-        <circle cx="250" cy="40" r="5" class="map-station" id="station-Sarthana" onclick="selectMapStation('Sarthana BRTS')" />
-        <text x="250" y="30" class="map-station-label" text-anchor="middle">Sarthana</text>
+        <circle cx="390" cy="120" r="5" class="map-station" id="station-Sayan" onclick="selectMapStation('Sayan BRTS')" />
+        <text x="405" y="124" class="map-station-label" style="font-size:8px">Sayan</text>
 
-        <!-- Row 2 -->
-        <circle cx="50" cy="120" r="5" class="map-station" id="station-Adajan" onclick="selectMapStation('Adajan Gam BRTS')" />
-        <text x="35" y="123" class="map-station-label" text-anchor="end">Adajan Gam</text>
+        <circle cx="60" cy="130" r="5" class="map-station" id="station-Adajan" onclick="selectMapStation('Adajan Gam BRTS')" />
+        <text x="45" y="134" class="map-station-label" text-anchor="end" style="font-size:8px">Adajan Gam</text>
 
-        <circle cx="150" cy="120" r="6" class="map-station" id="station-Railway" style="fill:var(--primary)" onclick="selectMapStation('Railway Station BRTS')" />
-        <text x="160" y="115" class="map-station-label" style="font-weight:700">Railway Stn (Hub)</text>
+        <circle cx="320" cy="140" r="5" class="map-station" id="station-Katargam" onclick="selectMapStation('Katargam BRTS')" />
+        <text x="335" y="144" class="map-station-label" style="font-size:8px">Katargam</text>
 
-        <circle cx="250" cy="120" r="5" class="map-station" id="station-Simada" onclick="selectMapStation('Simada Junction BRTS')" />
-        <text x="260" y="124" class="map-station-label">Simada Jn</text>
+        <circle cx="60" cy="200" r="5" class="map-station" id="station-Rander" onclick="selectMapStation('Rander Gam BRTS')" />
+        <text x="45" y="204" class="map-station-label" text-anchor="end" style="font-size:8px">Rander</text>
 
-        <!-- Row 3 -->
-        <circle cx="150" cy="200" r="5" class="map-station" id="station-Textile" onclick="selectMapStation('Textile Market BRTS')" />
-        <text x="160" y="204" class="map-station-label">Textile Mkt</text>
+        <circle cx="170" cy="200" r="5" class="map-station" id="station-MajuraGate" onclick="selectMapStation('Majura Gate BRTS')" />
+        <text x="170" y="188" class="map-station-label" text-anchor="middle" style="font-size:8px">Majura Gate</text>
 
-        <!-- Row 4 -->
-        <circle cx="50" cy="280" r="5" class="map-station" id="station-Airport" onclick="selectMapStation('Surat Airport BRTS')" />
-        <text x="50" y="300" class="map-station-label" text-anchor="middle">Airport</text>
+        <circle cx="250" cy="200" r="10" class="map-station map-hub" id="station-Railway" onclick="selectMapStation('Railway Station BRTS')" filter="url(#glow)"/>
+        <text x="250" y="182" class="map-station-label" text-anchor="middle" style="font-weight:800;font-size:9px;fill:var(--primary)">★ Railway Station (Hub)</text>
 
-        <circle cx="100" cy="280" r="5" class="map-station" id="station-Althan" onclick="selectMapStation('Althan BRTS')" />
-        <text x="100" y="270" class="map-station-label" text-anchor="middle">Althan</text>
+        <circle cx="390" cy="190" r="5" class="map-station" id="station-Simada" onclick="selectMapStation('Simada Junction BRTS')" />
+        <text x="405" y="194" class="map-station-label" style="font-size:8px">Simada Jn</text>
 
-        <circle cx="150" cy="280" r="5" class="map-station" id="station-Udhana" onclick="selectMapStation('Udhana BRTS')" />
-        <text x="160" y="284" class="map-station-label">Udhana</text>
+        <circle cx="250" cy="260" r="8" class="map-station map-hub" id="station-LalDarwaja" onclick="selectMapStation('Lal Darwaja BRTS')" filter="url(#glow)"/>
+        <text x="250" y="247" class="map-station-label" text-anchor="middle" style="font-weight:800;font-size:8px;fill:var(--secondary)">★ Lal Darwaja</text>
 
-        <!-- Row 5 -->
-        <circle cx="150" cy="360" r="5" class="map-station" id="station-Bhestan" onclick="selectMapStation('Bhestan BRTS')" />
-        <text x="150" y="380" class="map-station-label" text-anchor="middle">Bhestan</text>
+        <circle cx="390" cy="260" r="5" class="map-station" id="station-Varachha" onclick="selectMapStation('Varachha BRTS')" />
+        <text x="405" y="264" class="map-station-label" style="font-size:8px">Varachha</text>
+
+        <circle cx="170" cy="330" r="5" class="map-station" id="station-AthwaGate" onclick="selectMapStation('Athwa Gate BRTS')" />
+        <text x="155" y="334" class="map-station-label" text-anchor="end" style="font-size:8px">Athwa Gate</text>
+
+        <circle cx="250" cy="330" r="8" class="map-station map-hub" id="station-Textile" onclick="selectMapStation('Textile Market BRTS')" filter="url(#glow)"/>
+        <text x="250" y="318" class="map-station-label" text-anchor="middle" style="font-weight:800;font-size:8px;fill:#43A047">★ Textile Market</text>
+
+        <circle cx="390" cy="330" r="5" class="map-station" id="station-YogiChowk" onclick="selectMapStation('Yogi Chowk BRTS')" />
+        <text x="405" y="334" class="map-station-label" style="font-size:8px">Yogi Chowk</text>
+
+        <circle cx="60" cy="400" r="6" class="map-station map-terminal" id="station-Dumas" onclick="selectMapStation('Dumas BRTS')" />
+        <text x="45" y="404" class="map-station-label" text-anchor="end" style="font-weight:700;font-size:8px;fill:#8E24AA">Dumas</text>
+
+        <circle cx="110" cy="400" r="5" class="map-station" id="station-Vesu" onclick="selectMapStation('Vesu Gaam BRTS')" />
+        <text x="110" y="388" class="map-station-label" text-anchor="middle" style="font-size:8px">Vesu</text>
+
+        <circle cx="170" cy="400" r="5" class="map-station" id="station-Piplod" onclick="selectMapStation('Piplod BRTS')" />
+        <text x="155" y="404" class="map-station-label" text-anchor="end" style="font-size:8px">Piplod</text>
+
+        <circle cx="250" cy="400" r="8" class="map-station map-hub" id="station-CityCenter" onclick="selectMapStation('City Center BRTS')" filter="url(#glow)"/>
+        <text x="250" y="418" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8px;fill:var(--primary)">City Center</text>
+
+        <circle cx="320" cy="400" r="5" class="map-station" id="station-KatarDarwaja" onclick="selectMapStation('Katargam Darwaja BRTS')" />
+        <text x="320" y="418" class="map-station-label" text-anchor="middle" style="font-size:7.5px">Katargam Dw</text>
+
+        <circle cx="390" cy="400" r="5" class="map-station" id="station-RingRoad" onclick="selectMapStation('Ring Road BRTS')" />
+        <text x="405" y="404" class="map-station-label" style="font-size:8px">Ring Road</text>
+
+        <circle cx="170" cy="470" r="5" class="map-station" id="station-VIPRoad" onclick="selectMapStation('V.I.P. Road BRTS')" />
+        <text x="155" y="474" class="map-station-label" text-anchor="end" style="font-size:8px">VIP Road</text>
+
+        <circle cx="250" cy="470" r="5" class="map-station" id="station-GhodDod" onclick="selectMapStation('Ghod Dod Road BRTS')" />
+        <text x="265" y="474" class="map-station-label" style="font-size:8px">Ghod Dod Rd</text>
+
+        <circle cx="390" cy="470" r="5" class="map-station" id="station-VedRoad" onclick="selectMapStation('Ved Road BRTS')" />
+        <text x="405" y="474" class="map-station-label" style="font-size:8px">Ved Road</text>
+
+        <circle cx="60" cy="540" r="7" class="map-station map-terminal" id="station-Airport" onclick="selectMapStation('Surat Airport BRTS')" />
+        <text x="60" y="560" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8.5px;fill:#FB8C00">✈ Surat Airport</text>
+
+        <circle cx="110" cy="540" r="5" class="map-station" id="station-Althan" onclick="selectMapStation('Althan BRTS')" />
+        <text x="110" y="528" class="map-station-label" text-anchor="middle" style="font-size:8px">Althan</text>
+
+        <circle cx="250" cy="540" r="8" class="map-station map-hub" id="station-Udhana" onclick="selectMapStation('Udhana BRTS')" filter="url(#glow)"/>
+        <text x="250" y="528" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8px;fill:#E53935">★ Udhana</text>
+
+        <circle cx="320" cy="540" r="5" class="map-station" id="station-Kosad" onclick="selectMapStation('Kosad BRTS')" />
+        <text x="320" y="528" class="map-station-label" text-anchor="middle" style="font-size:8px">Kosad</text>
+
+        <circle cx="390" cy="540" r="6" class="map-station map-terminal" id="station-Pandesara" onclick="selectMapStation('Pandesara BRTS')" />
+        <text x="405" y="544" class="map-station-label" style="font-weight:700;font-size:8px;fill:#00897B">Pandesara</text>
+
+        <circle cx="110" cy="620" r="5" class="map-station" id="station-Bhimrad" onclick="selectMapStation('Bhimrad BRTS')" />
+        <text x="95" y="624" class="map-station-label" text-anchor="end" style="font-size:8px">Bhimrad</text>
+
+        <circle cx="250" cy="620" r="5" class="map-station" id="station-Bhestan" onclick="selectMapStation('Bhestan BRTS')" />
+        <text x="265" y="624" class="map-station-label" style="font-size:8px">Bhestan</text>
+
+        <circle cx="390" cy="620" r="5" class="map-station" id="station-Sachin" onclick="selectMapStation('Sachin G.I.D.C. BRTS')" />
+        <text x="405" y="624" class="map-station-label" style="font-size:8px">Sachin GIDC</text>
+
+        <circle cx="110" cy="680" r="6" class="map-station map-terminal" id="station-AlthanDepot" onclick="selectMapStation('Althan Depot Terminal BRTS')" />
+        <text x="110" y="698" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8px;fill:#43A047">Althan Depot</text>
+
+        <circle cx="250" cy="680" r="6" class="map-station map-terminal" id="station-UdhanaDarwaja" onclick="selectMapStation('Udhana Darwaja BRTS')" />
+        <text x="250" y="698" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8px;fill:#E53935">Udhana Darwaja</text>
+
+        <circle cx="390" cy="680" r="6" class="map-station map-terminal" id="station-SachinGam" onclick="selectMapStation('Sachin Gam BRTS')" />
+        <text x="390" y="698" class="map-station-label" text-anchor="middle" style="font-weight:700;font-size:8px;fill:#00897B">Sachin Gam</text>
 
         <!-- Moving Bus Simulator Icon -->
         <g id="mapBusIcon" style="display:none; transition: transform 0.5s ease">
-          <circle cx="0" cy="0" r="8" fill="var(--secondary)" stroke="white" stroke-width="1.5" />
-          <i class="fas fa-bus" style="font-size:7px; color:white; position:absolute; transform: translate(-3.5px, -3.5px)"></i>
-          <!-- Small SVG bus glyph inside -->
+          <circle cx="0" cy="0" r="8" fill="var(--secondary)" stroke="white" stroke-width="2" />
           <path d="M-3,-3 L3,-3 L3,3 L-3,3 Z" fill="white" />
         </g>
       </svg>
       
+      <!-- Route Legend -->
       <div class="map-legend">
-        <strong>Route Simulator</strong>: Selected stops will trace a path automatically. Click nodes on map to set source/destination.
+        <div class="map-legend-title" style="font-weight:700;margin-bottom:6px"><i class="fas fa-route"></i> Surat BRTS Corridors</div>
+        <div class="map-legend-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px">
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#E53935;border-radius:2px;margin-right:4px"></span> Line 1: Udhna–Sarthana</div>
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#1E88E5;border-radius:2px;margin-right:4px"></span> Line 2: Jahangirpura–Katargam</div>
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#43A047;border-radius:2px;margin-right:4px"></span> Line 3: Althan–Varachha</div>
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#FB8C00;border-radius:2px;margin-right:4px"></span> Line 4: Airport–Lal Darwaja</div>
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#8E24AA;border-radius:2px;margin-right:4px"></span> Line 5: Dumas–Textile Mkt</div>
+          <div class="legend-item"><span class="legend-color" style="display:inline-block;width:12px;height:4px;background:#00897B;border-radius:2px;margin-right:4px"></span> Line 6: Pandesara–Ring Rd</div>
+        </div>
+        <div class="map-legend-hint" style="margin-top:8px;font-size:10px;color:var(--text-secondary)"><i class="fas fa-hand-pointer"></i> Tap stations on map to set source/destination</div>
       </div>
     </div>
   </div>

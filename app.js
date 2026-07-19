@@ -42,17 +42,40 @@ const routeMap = {
 
 // SVG Node positions for selected stations in the SVG map
 const mapStationCoordinates = {
-  "Jahangirpura BRTS": { x: 50, y: 40 },
-  "Sayan BRTS": { x: 150, y: 40 },
-  "Sarthana BRTS": { x: 250, y: 40 },
-  "Adajan Gam BRTS": { x: 50, y: 120 },
-  "Railway Station BRTS": { x: 150, y: 120 },
-  "Simada Junction BRTS": { x: 250, y: 120 },
-  "Textile Market BRTS": { x: 150, y: 200 },
-  "Surat Airport BRTS": { x: 50, y: 360 },
-  "Althan BRTS": { x: 100, y: 280 },
-  "Udhana BRTS": { x: 150, y: 280 },
-  "Bhestan BRTS": { x: 150, y: 360 }
+  "Jahangirpura BRTS": { x: 60, y: 60 },
+  "Sarthana BRTS": { x: 390, y: 60 },
+  "Sayan BRTS": { x: 390, y: 120 },
+  "Adajan Gam BRTS": { x: 60, y: 130 },
+  "Katargam BRTS": { x: 320, y: 140 },
+  "Rander Gam BRTS": { x: 60, y: 200 },
+  "Majura Gate BRTS": { x: 170, y: 200 },
+  "Railway Station BRTS": { x: 250, y: 200 },
+  "Simada Junction BRTS": { x: 390, y: 190 },
+  "Lal Darwaja BRTS": { x: 250, y: 260 },
+  "Varachha BRTS": { x: 390, y: 260 },
+  "Athwa Gate BRTS": { x: 170, y: 330 },
+  "Textile Market BRTS": { x: 250, y: 330 },
+  "Yogi Chowk BRTS": { x: 390, y: 330 },
+  "Dumas BRTS": { x: 60, y: 400 },
+  "Vesu Gaam BRTS": { x: 110, y: 400 },
+  "Piplod BRTS": { x: 170, y: 400 },
+  "City Center BRTS": { x: 250, y: 400 },
+  "Katargam Darwaja BRTS": { x: 320, y: 400 },
+  "Ring Road BRTS": { x: 390, y: 400 },
+  "V.I.P. Road BRTS": { x: 170, y: 470 },
+  "Ghod Dod Road BRTS": { x: 250, y: 470 },
+  "Ved Road BRTS": { x: 390, y: 470 },
+  "Surat Airport BRTS": { x: 60, y: 540 },
+  "Althan BRTS": { x: 110, y: 540 },
+  "Udhana BRTS": { x: 250, y: 540 },
+  "Kosad BRTS": { x: 320, y: 540 },
+  "Pandesara BRTS": { x: 390, y: 540 },
+  "Bhimrad BRTS": { x: 110, y: 620 },
+  "Bhestan BRTS": { x: 250, y: 620 },
+  "Sachin G.I.D.C. BRTS": { x: 390, y: 620 },
+  "Althan Depot Terminal BRTS": { x: 110, y: 680 },
+  "Udhana Darwaja BRTS": { x: 250, y: 680 },
+  "Sachin Gam BRTS": { x: 390, y: 680 }
 };
 
 // Global App States
@@ -1238,16 +1261,39 @@ function updateMapHighlight() {
 // Convert station names to map SVG node IDs
 function getMapNodeId(stationName) {
   if (stationName.includes("Jahangirpura")) return "station-Jahangirpura";
-  if (stationName.includes("Sayan")) return "station-Sayan";
   if (stationName.includes("Sarthana")) return "station-Sarthana";
+  if (stationName.includes("Sayan")) return "station-Sayan";
   if (stationName.includes("Adajan")) return "station-Adajan";
+  if (stationName.includes("Katargam Darwaja")) return "station-KatarDarwaja";
+  if (stationName.includes("Katargam")) return "station-Katargam";
+  if (stationName.includes("Rander")) return "station-Rander";
+  if (stationName.includes("Majura Gate")) return "station-MajuraGate";
   if (stationName.includes("Railway")) return "station-Railway";
   if (stationName.includes("Simada")) return "station-Simada";
+  if (stationName.includes("Lal Darwaja")) return "station-LalDarwaja";
+  if (stationName.includes("Varachha")) return "station-Varachha";
+  if (stationName.includes("Athwa Gate")) return "station-AthwaGate";
   if (stationName.includes("Textile")) return "station-Textile";
+  if (stationName.includes("Yogi Chowk")) return "station-YogiChowk";
+  if (stationName.includes("Dumas")) return "station-Dumas";
+  if (stationName.includes("Vesu")) return "station-Vesu";
+  if (stationName.includes("Piplod")) return "station-Piplod";
+  if (stationName.includes("City Center")) return "station-CityCenter";
+  if (stationName.includes("Ring Road")) return "station-RingRoad";
+  if (stationName.includes("VIP") || stationName.includes("V.I.P.")) return "station-VIPRoad";
+  if (stationName.includes("Ghod Dod")) return "station-GhodDod";
+  if (stationName.includes("Ved Road")) return "station-VedRoad";
   if (stationName.includes("Airport")) return "station-Airport";
+  if (stationName.includes("Althan Depot")) return "station-AlthanDepot";
   if (stationName.includes("Althan")) return "station-Althan";
+  if (stationName.includes("Udhana Darwaja")) return "station-UdhanaDarwaja";
   if (stationName.includes("Udhana")) return "station-Udhana";
+  if (stationName.includes("Kosad")) return "station-Kosad";
+  if (stationName.includes("Pandesara")) return "station-Pandesara";
+  if (stationName.includes("Bhimrad")) return "station-Bhimrad";
   if (stationName.includes("Bhestan")) return "station-Bhestan";
+  if (stationName.includes("Sachin Gam")) return "station-SachinGam";
+  if (stationName.includes("Sachin")) return "station-Sachin";
   return "";
 }
 
