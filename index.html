@@ -337,18 +337,21 @@
 
     <!-- Mode 1: Interactive Real Google Maps of Surat City -->
     <div id="mapViewInteractive" class="map-view-section">
-      <!-- Google Maps Action Bar -->
+      <!-- Map Controls Bar -->
       <div style="display: flex; gap: 8px; margin-bottom: 10px;">
         <button class="trip-action-btn filled" style="flex: 1; height: 38px; font-size: 12px;" onclick="openInGoogleMaps()">
-          <i class="fab fa-google"></i> Open in Google Maps App
+          <i class="fab fa-google"></i> Open in Google Maps
         </button>
         <button class="trip-action-btn outline" style="width: auto; padding: 0 14px; height: 38px; font-size: 12px;" onclick="toggleMapSource()">
-          <span id="mapSourceLabel"><i class="fas fa-layer-group"></i> Google / OSM</span>
+          <span id="mapSourceLabel"><i class="fas fa-satellite"></i> Google / OSM Map</span>
         </button>
       </div>
 
-      <!-- Real Google Maps Iframe Container -->
-      <div id="googleMapsContainer" style="width: 100%; height: 460px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 15px var(--shadow);">
+      <!-- Real Leaflet Map Container (Default View with BRTS Routes & Stations) -->
+      <div id="leafletMap" style="width: 100%; height: 460px; border-radius: 16px; box-shadow: 0 4px 15px var(--shadow); position: relative; z-index: 1;"></div>
+
+      <!-- Google Maps Iframe Container (Toggle View) -->
+      <div id="googleMapsContainer" style="width: 100%; height: 460px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 15px var(--shadow); display: none;">
         <iframe 
           id="googleMapsIframe"
           title="Surat City Google Map"
@@ -361,9 +364,6 @@
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119066.4170950669!2d72.75703273391823!3d21.161348398188185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e59411d1563%3A0xfe4558290938b042!2sSurat%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin">
         </iframe>
       </div>
-
-      <!-- Leaflet Map Container (Alternative view) -->
-      <div id="leafletMap" style="width: 100%; height: 460px; border-radius: 16px; box-shadow: 0 4px 15px var(--shadow); position: relative; z-index: 1; display: none;"></div>
 
       <div class="map-legend" style="margin-top: 10px;">
         <div style="font-weight: 700; margin-bottom: 4px; font-size: 12px;">

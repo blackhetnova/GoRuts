@@ -227,6 +227,7 @@ function navigateTo(pageId) {
     renderNotifications();
   } else if (pageId === 'map') {
     updateMapHighlight();
+    initLeafletMap();
   } else if (pageId === 'home') {
     quickRebookList();
   }
@@ -1297,6 +1298,152 @@ function getMapNodeId(stationName) {
   return "";
 }
 
+// Leaflet Real Map Instance & BRTS Routes Overlay
+let leafletMapInstance = null;
+let leafletMarkersGroup = null;
+let leafletRoutesGroup = null;
+let leafletTripPolyline = null;
+
+// Geographic Lat/Lng positions for Surat BRTS Stations
+const stationGeoCoordinates = {
+  "Railway Station BRTS": [21.2052, 72.8406],
+  "Lal Darwaja BRTS": [21.2023, 72.8322],
+  "Textile Market BRTS": [21.1895, 72.8465],
+  "Udhana BRTS": [21.1680, 72.8420],
+  "Bhestan BRTS": [21.1340, 72.8450],
+  "Sachin G.I.D.C. BRTS": [21.0820, 72.8590],
+  "Adajan Gam BRTS": [21.1960, 72.7930],
+  "Jahangirpura BRTS": [21.2320, 72.7840],
+  "Sayan BRTS": [21.3200, 72.8800],
+  "Sarthana BRTS": [21.2320, 72.9050],
+  "Simada Junction BRTS": [21.2180, 72.8850],
+  "Varachha BRTS": [21.2100, 72.8650],
+  "Yogi Chowk BRTS": [21.2120, 72.8950],
+  "Surat Airport BRTS": [21.1140, 72.7420],
+  "Dumas BRTS": [21.0800, 72.7090],
+  "Vesu Gaam BRTS": [21.1390, 72.7750],
+  "Piplod BRTS": [21.1600, 72.7830],
+  "Athwa Gate BRTS": [21.1780, 72.8120],
+  "Majura Gate BRTS": [21.1820, 72.8220],
+  "Ghod Dod Road BRTS": [21.1680, 72.8120],
+  "V.I.P. Road BRTS": [21.1480, 72.7950],
+  "Althan BRTS": [21.1520, 72.8150],
+  "Bhimrad BRTS": [21.1350, 72.8050],
+  "Katargam BRTS": [21.2250, 72.8350],
+  "Rander Gam BRTS": [21.2100, 72.7980],
+  "Pandesara BRTS": [21.1450, 72.8420],
+  "Ring Road BRTS": [21.1890, 72.8350],
+  "City Center BRTS": [21.1850, 72.8300]
+};
+
+// 6 Major BRTS Corridors Geographic LatLng Lines
+const brtsCorridorsGeo = [
+  { name: "Line 1: Udhna–Sarthana", color: "#E53935", points: [[21.232, 72.905], [21.218, 72.885], [21.210, 72.865], [21.2052, 72.8406], [21.2023, 72.8322], [21.1895, 72.8465], [21.168, 72.842], [21.134, 72.845], [21.082, 72.859]] },
+  { name: "Line 2: Jahangirpura–Katargam", color: "#1E88E5", points: [[21.232, 72.784], [21.210, 72.798], [21.196, 72.793], [21.182, 72.822], [21.2052, 72.8406], [21.225, 72.835], [21.240, 72.845]] },
+  { name: "Line 3: Althan–Varachha", color: "#43A047", points: [[21.140, 72.810], [21.152, 72.815], [21.168, 72.812], [21.185, 72.830], [21.1895, 72.8465], [21.210, 72.865], [21.232, 72.905]] },
+  { name: "Line 4: Airport–Lal Darwaja", color: "#FB8C00", points: [[21.114, 72.742], [21.148, 72.795], [21.178, 72.812], [21.2023, 72.8322]] },
+  { name: "Line 5: Dumas–Textile Market", color: "#8E24AA", points: [[21.080, 72.709], [21.139, 72.775], [21.160, 72.783], [21.185, 72.830], [21.1895, 72.8465]] },
+  { name: "Line 6: Pandesara–Ring Road", color: "#00897B", points: [[21.145, 72.842], [21.168, 72.842], [21.189, 72.835], [21.215, 72.825]] }
+];
+
+function initLeafletMap() {
+  const container = document.getElementById('leafletMap');
+  if (!container || typeof L === 'undefined') return;
+
+  if (!leafletMapInstance) {
+    // Center map on Surat City [21.1702, 72.8311]
+    leafletMapInstance = L.map('leafletMap').setView([21.1702, 72.8311], 12);
+
+    // OpenStreetMap Tile Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors | Surat BRTS'
+    }).addTo(leafletMapInstance);
+
+    leafletRoutesGroup = L.layerGroup().addTo(leafletMapInstance);
+    leafletMarkersGroup = L.layerGroup().addTo(leafletMapInstance);
+
+    // Draw BRTS Corridors
+    brtsCorridorsGeo.forEach(corridor => {
+      L.polyline(corridor.points, {
+        color: corridor.color,
+        weight: 5,
+        opacity: 0.8,
+        lineCap: 'round'
+      }).bindTooltip(corridor.name, { sticky: true }).addTo(leafletRoutesGroup);
+    });
+
+    // Add Bus Stop Markers
+    Object.keys(stationGeoCoordinates).forEach(stName => {
+      const coords = stationGeoCoordinates[stName];
+      const isHub = stName.includes('Railway') || stName.includes('Lal Darwaja') || stName.includes('Textile');
+      
+      const marker = L.circleMarker(coords, {
+        radius: isHub ? 8 : 6,
+        fillColor: isHub ? '#e85d04' : '#1e5aa8',
+        color: '#ffffff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.9
+      });
+
+      const popupHtml = `
+        <div style="text-align:center; padding: 4px;">
+          <strong style="font-size:13px; color:#1e5aa8">${stName}</strong>
+          <p style="font-size:10px; color:#666; margin:4px 0 8px 0;">Surat BRTS Bus Station</p>
+          <div style="display:flex; gap:4px; justify-content:center;">
+            <button style="background:#1e5aa8; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:10px; cursor:pointer;" onclick="setStationFromMap('${stName}', 'from')">Set From</button>
+            <button style="background:#e85d04; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:10px; cursor:pointer;" onclick="setStationFromMap('${stName}', 'to')">Set To</button>
+          </div>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml).addTo(leafletMarkersGroup);
+    });
+  }
+
+  setTimeout(() => {
+    leafletMapInstance.invalidateSize();
+    updateLeafletTripRoute();
+  }, 200);
+}
+
+function setStationFromMap(stName, type) {
+  if (type === 'from') {
+    selectedFrom = stName;
+    document.getElementById('fromStopLabel').textContent = getShortStopName(stName);
+    showToast(`From set to ${getShortStopName(stName)}`);
+  } else {
+    selectedTo = stName;
+    document.getElementById('toStopLabel').textContent = getShortStopName(stName);
+    showToast(`To set to ${getShortStopName(stName)}`);
+  }
+  updateLeafletTripRoute();
+}
+
+function updateLeafletTripRoute() {
+  if (!leafletMapInstance) return;
+
+  if (leafletTripPolyline) {
+    leafletMapInstance.removeLayer(leafletTripPolyline);
+    leafletTripPolyline = null;
+  }
+
+  if (selectedFrom && selectedTo && stationGeoCoordinates[selectedFrom] && stationGeoCoordinates[selectedTo]) {
+    const p1 = stationGeoCoordinates[selectedFrom];
+    const p2 = stationGeoCoordinates[selectedTo];
+
+    leafletTripPolyline = L.polyline([p1, p2], {
+      color: '#e85d04',
+      weight: 6,
+      opacity: 0.9,
+      dashArray: '8, 8'
+    }).addTo(leafletMapInstance);
+
+    leafletMapInstance.fitBounds([p1, p2], { padding: [40, 40] });
+  }
+}
+
 // Google Maps Navigation & View Switchers
 function openInGoogleMaps() {
   let query = "Surat BRTS";
@@ -1317,14 +1464,14 @@ function toggleMapSource() {
   if (gContainer.style.display === 'none') {
     gContainer.style.display = 'block';
     lContainer.style.display = 'none';
-    if (label) label.innerHTML = '<i class="fas fa-layer-group"></i> Google / OSM';
+    if (label) label.innerHTML = '<i class="fas fa-satellite"></i> OpenStreetMap';
     showToast('Switched to Google Maps View');
   } else {
     gContainer.style.display = 'none';
     lContainer.style.display = 'block';
-    if (label) label.innerHTML = '<i class="fas fa-map"></i> OpenStreetMap';
+    if (label) label.innerHTML = '<i class="fas fa-satellite"></i> Google Maps';
     initLeafletMap();
-    showToast('Switched to Interactive OpenStreetMap View');
+    showToast('Switched to Interactive BRTS Routes Map');
   }
 }
 
@@ -1341,7 +1488,8 @@ function switchMapViewMode(mode) {
   });
 
   if (mode === 'interactive') {
-    showToast('🗺️ Live Surat City Map');
+    initLeafletMap();
+    showToast('🗺️ Live Surat BRTS Routes Map');
   } else if (mode === 'official') {
     showToast('📜 Official Surat Route Map (SMC)');
   } else if (mode === 'schematic') {
@@ -1355,10 +1503,9 @@ function locateUserOnMap() {
     navigator.geolocation.getCurrentPosition(pos => {
       const { latitude, longitude } = pos.coords;
       showToast(`📍 Your Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-      // Update iframe source centered near user if in Surat
-      const gIframe = document.getElementById('googleMapsIframe');
-      if (gIframe) {
-        gIframe.src = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d30000!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin`;
+      if (leafletMapInstance) {
+        leafletMapInstance.setView([latitude, longitude], 15);
+        L.marker([latitude, longitude]).bindPopup('📍 You are here').addTo(leafletMapInstance).openPopup();
       }
     }, err => {
       showToast('📍 Showing Surat City Center');
