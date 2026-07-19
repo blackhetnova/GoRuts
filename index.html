@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
   <!-- PWA Manifest & Meta Tags -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1e5aa8">
@@ -314,12 +314,12 @@
 
     <!-- Live Ticket Visual -->
     <div class="ticket-wrapper" id="ticketVisualArea">
-      <!-- Color header -->
-      <div class="ticket-header" id="ticketStatusHeader">
-        <div class="ticket-status-title" id="ticketStatusText">
+      <!-- Header -->
+      <div class="ticket-header" id="ticketStatusHeader" style="background: #ffffff !important; color: var(--primary) !important; border-bottom: 1px solid var(--border) !important;">
+        <div class="ticket-status-title" id="ticketStatusText" style="color: var(--primary) !important;">
           VALID TICKET
         </div>
-        <div class="ticket-status-subtitle">Scan at the smart entry gate & enjoy your ride</div>
+        <div class="ticket-status-subtitle" style="color: var(--text-secondary) !important;">Scan at the smart entry gate & enjoy your ride</div>
       </div>
 
       <!-- QR Code Section -->

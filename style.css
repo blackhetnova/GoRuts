@@ -902,38 +902,39 @@ body {
 }
 
 .ticket-header {
-  background: #ffffff;
-  color: var(--primary);
-  border-bottom: 1px solid var(--border);
-  padding: 16px;
-  text-align: center;
+  background: #ffffff !important;
+  color: var(--primary) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 16px !important;
+  text-align: center !important;
 }
 
 .ticket-header.expired {
-  background: linear-gradient(135deg, var(--danger), #e02b20);
-  color: white;
+  background: linear-gradient(135deg, var(--danger), #e02b20) !important;
+  color: white !important;
 }
 
 .ticket-header.suman {
-  background: #ffffff;
-  color: var(--primary);
-  border-bottom: 1px solid var(--border);
+  background: #ffffff !important;
+  color: var(--primary) !important;
+  border-bottom: 1px solid var(--border) !important;
 }
 
 .ticket-status-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin-bottom: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
 }
 
 .ticket-status-subtitle {
-  font-size: 11px;
-  color: var(--text-secondary);
-  opacity: 1;
+  font-size: 11px !important;
+  color: var(--text-secondary) !important;
+  opacity: 1 !important;
 }
 
 .ticket-qr-section {
