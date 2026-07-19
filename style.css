@@ -151,6 +151,10 @@ body {
   object-fit: contain;
   max-width: 220px;
   border-radius: 0px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  mix-blend-mode: multiply !important;
 }
 
 .header-action {
