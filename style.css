@@ -409,17 +409,20 @@ body {
 }
 
 .hot-offer-banner {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
 }
 
 .hot-offer-img {
-  width: 100%;
-  max-height: 120px !important;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12) !important;
 }
 
 /* ======================== */
