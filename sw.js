@@ -1,10 +1,18 @@
-const CACHE_NAME = 'gorutes-v38';
+const CACHE_NAME = 'gorutes-v39';
 const ASSETS = [
   './',
   './index.html',
   './css/style.css',
   './js/data.js',
-  './js/app.js',
+  './js/core.js',
+  './js/navigation.js',
+  './js/home.js',
+  './js/checkout.js',
+  './js/ticket.js',
+  './js/booking.js',
+  './js/notifications.js',
+  './js/map.js',
+  './js/pwa.js',
   './assets/icon.png',
   './assets/gorutes_logo_v3.png',
   './assets/surat_smart_city_banner_v2.png',

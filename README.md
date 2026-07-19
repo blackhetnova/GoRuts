@@ -121,16 +121,24 @@
 
 ```
 GoRuts/
-├── index.html          # Main app HTML with all pages
-├── sw.js               # Service Worker for offline caching
-├── manifest.json       # PWA manifest configuration
+├── index.html              # Main app HTML with all pages
+├── sw.js                   # Service Worker for offline caching
+├── manifest.json           # PWA manifest configuration
 ├── css/
-│   └── style.css       # Complete styling with CSS variables
+│   └── style.css           # Complete styling with CSS variables
 ├── js/
-│   ├── data.js         # Static configuration datasets (stops, routes, coordinates)
-│   └── app.js          # Core application logic & state management
-├── assets/             # Images, banners, and app icons
-└── README.md           # This file
+│   ├── data.js             # Static datasets (stops, routes, coordinates, translations)
+│   ├── core.js             # Global state, init, localStorage, theme/lang, toast
+│   ├── navigation.js       # Page router, side menu, login modal, drawer modals
+│   ├── home.js             # Home screen: stop search, fare calc, quick rebook
+│   ├── checkout.js         # Checkout: payment gateway, Suman Pravas, order summary
+│   ├── ticket.js           # Ticket screen: QR gen, countdown timer, simulator
+│   ├── booking.js          # Booking history: tabs, list render, clear/reset
+│   ├── notifications.js    # Notifications feed, search bar route lookup
+│   ├── map.js              # Transit map: SVG, Leaflet, Google Maps, geolocation
+│   └── pwa.js              # PWA install prompt & service worker registration
+├── assets/                 # Images, banners, and app icons
+└── README.md               # This file
 ```
 
 ---
