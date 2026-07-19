@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gorutes-v33';
+const CACHE_NAME = 'gorutes-v34';
 const ASSETS = [
   './',
   './index.html',

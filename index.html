@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css?v=19">
+  <link rel="stylesheet" href="style.css?v=20">
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,52 +29,91 @@
   <!-- Menu Overlay -->
   <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu(false)"></div>
 
-  <!-- Side Navigation / Control Menu -->
+  <!-- Side Navigation Drawer (100% Match with Official Sitilink App) -->
   <div class="side-menu" id="sideMenu">
-    <div class="menu-header">
-      <div class="menu-user">
-        <div class="user-avatar" id="menuAvatarBtn" onclick="editProfileName()">
-          <i class="fas fa-user-astronaut"></i>
-        </div>
-        <div class="user-info">
-          <h3 id="userDisplayName">Guest User</h3>
-          <p id="userDisplayLoc"><i class="fas fa-map-marker-alt"></i> Surat, Gujarat</p>
-        </div>
+    <!-- Profile Header Section -->
+    <div class="sitilink-menu-header" onclick="openLoginModal()" title="Click to edit profile name">
+      <div class="sitilink-avatar">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M20 21a8 8 0 0 0-16 0"/>
+        </svg>
       </div>
+      <div class="sitilink-user-name" id="userDisplayName">Panth</div>
     </div>
     
-    <div class="menu-items">
-      <div class="menu-section-title">Navigation</div>
-      <button class="menu-item" onclick="navigateTo('home')">
-        <span class="menu-item-left"><i class="fas fa-home"></i> Home</span>
+    <div class="sitilink-menu-divider"></div>
+
+    <!-- Menu Items List (Exact order & icons from Sitilink App photo) -->
+    <div class="menu-items sitilink-drawer-items">
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); navigateTo('home')">
+        <i class="fas fa-ticket-alt"></i>
+        <span>M Ticket</span>
       </button>
-      <button class="menu-item" onclick="navigateTo('booking')">
-        <span class="menu-item-left"><i class="fas fa-ticket-alt"></i> My Bookings</span>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); locateUserOnMap(); navigateTo('map')">
+        <i class="fas fa-location-arrow"></i>
+        <span>Near you</span>
       </button>
-      <button class="menu-item" onclick="navigateTo('map')">
-        <span class="menu-item-left"><i class="fas fa-route"></i> Transit Map</span>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Added to Favourites')">
+        <i class="far fa-star"></i>
+        <span>Favourites</span>
       </button>
-      <button class="menu-item" onclick="navigateTo('notifications')">
-        <span class="menu-item-left"><i class="fas fa-bell"></i> Alerts</span>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); navigateTo('map')">
+        <i class="far fa-map"></i>
+        <span>Transit Map</span>
       </button>
-      
-      <div class="menu-section-title">Simulator Settings</div>
-      <div class="menu-item">
-        <span class="menu-item-left"><i class="fas fa-moon"></i> Dark Mode</span>
-        <div class="menu-toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()"></div>
-      </div>
-      <div class="menu-item">
-        <span class="menu-item-left"><i class="fas fa-infinity"></i> Infinite Timer</span>
-        <div class="menu-toggle-switch" id="infiniteTimerToggle" onclick="toggleInfiniteTimer()"></div>
-      </div>
-      <div class="menu-item">
-        <span class="menu-item-left"><i class="fas fa-language"></i> Gujarati Lang</span>
-        <div class="menu-toggle-switch" id="langToggle" onclick="toggleLanguage()"></div>
-      </div>
-      
-      <div class="menu-section-title">Actions</div>
-      <button class="menu-item" onclick="resetSimulatorData()">
-        <span class="menu-item-left" style="color:var(--danger)"><i class="fas fa-trash-alt" style="color:var(--danger)"></i> Reset App Data</span>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); navigateTo('booking')">
+        <i class="far fa-id-card"></i>
+        <span>Transaction History</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('SMC Grievance Helpline: 1800 233 0294')">
+        <i class="far fa-comment-dots"></i>
+        <span>Complaint</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Thank you for rating Surat BRTS!')">
+        <i class="far fa-comments"></i>
+        <span>Feedback</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); shareApp()">
+        <i class="fas fa-bullhorn"></i>
+        <span>Invite Friends</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleLanguage()">
+        <i class="fas fa-globe"></i>
+        <span>Change Language</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('BRTS Control Room: 0261-2423751')">
+        <i class="fas fa-phone-alt"></i>
+        <span>Contact Us</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Surat Municipal Corporation Terms 2026')">
+        <i class="far fa-newspaper"></i>
+        <span>Terms and Condition</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="toggleMenu(false); showToast('Surat Smart City Privacy Policy')">
+        <i class="far fa-shield-alt"></i>
+        <span>Privacy Policy</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="deleteAccount()">
+        <i class="fas fa-user-slash"></i>
+        <span>Delete Account</span>
+      </button>
+
+      <button class="sitilink-drawer-item" onclick="logoutUser()">
+        <i class="fas fa-power-off"></i>
+        <span>Signout</span>
       </button>
     </div>
   </div>
@@ -675,6 +714,27 @@
       </div>
     </div>
     <button class="qr-modal-close" onclick="closeFullQR()"><i class="fas fa-times-circle"></i></button>
+  <!-- User Profile / Login Modal -->
+  <div class="qr-modal" id="loginModal" onclick="closeLoginModal()">
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:340px; text-align:left; padding:22px;">
+      <h3 style="margin-bottom:4px; color:#111; font-size:18px; font-weight:600">Passenger Profile</h3>
+      <p style="font-size:12px; color:#666; margin-bottom:18px">Enter name to display on your BRTS pass & app profile</p>
+      
+      <div style="margin-bottom:16px">
+        <label style="font-size:11px; color:#666; font-weight:500; display:block; margin-bottom:6px">PASSENGER NAME</label>
+        <input type="text" id="loginNameInput" placeholder="Enter name e.g. Panth" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:14px; font-family:inherit; color:#222">
+      </div>
+
+      <div style="display:flex; gap:10px">
+        <button class="trip-action-btn outline" style="flex:1; border-radius:8px !important; font-weight:500 !important;" onclick="closeLoginModal()">
+          Cancel
+        </button>
+        <button class="show-route-btn" style="flex:1; border-radius:8px !important; font-weight:500 !important; font-size:14px !important;" onclick="saveLoginUser()">
+          Save Name
+        </button>
+      </div>
+    </div>
+    <button class="qr-modal-close" onclick="closeLoginModal()"><i class="fas fa-times-circle"></i></button>
   </div>
 
   <!-- Core Javascript Libs and Logic -->

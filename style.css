@@ -523,12 +523,12 @@ body {
   right: -100% !important;
   left: auto !important;
   width: 82%;
-  max-width: 340px;
+  max-width: 320px;
   height: 100vh;
-  background: var(--card);
+  background: #2563eb;
   z-index: 2000;
   transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
 }
@@ -536,6 +536,69 @@ body {
 .side-menu.open {
   right: 0 !important;
   left: auto !important;
+}
+
+.sitilink-menu-header {
+  padding: 24px 20px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.sitilink-avatar {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sitilink-user-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.sitilink-menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 20px 6px;
+}
+
+.sitilink-drawer-items {
+  padding: 4px 0 30px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sitilink-drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 13px 22px;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 400;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.3px;
+  transition: background 0.2s ease;
+}
+
+.sitilink-drawer-item:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sitilink-drawer-item i {
+  font-size: 18px;
+  color: #ffffff;
+  width: 24px;
+  text-align: center;
 }
 
 .menu-overlay {

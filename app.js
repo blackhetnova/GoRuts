@@ -94,7 +94,7 @@ let activeHistoryTab = 'active';
 // User Configs & Simulator preferences
 let userPreferences = {
   theme: 'light',
-  userName: 'Guest User',
+  userName: 'Panth',
   location: 'Surat, Gujarat',
   infiniteTimer: false,
   language: 'en'
@@ -295,15 +295,65 @@ function toggleMenu(show) {
   }
 }
 
-// Edit Profile settings
-function editProfileName() {
-  const newName = prompt("Enter guest passenger name:", userPreferences.userName);
-  if (newName && newName.trim() !== "") {
-    userPreferences.userName = newName.trim();
-    document.getElementById('userDisplayName').textContent = userPreferences.userName;
+// Edit Profile & Login Modal Settings
+function openLoginModal() {
+  const modal = document.getElementById('loginModal');
+  const input = document.getElementById('loginNameInput');
+  if (input) input.value = userPreferences.userName || 'Panth';
+  if (modal) modal.classList.add('open');
+}
+
+function closeLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function saveLoginUser() {
+  const input = document.getElementById('loginNameInput');
+  if (input && input.value.trim() !== '') {
+    userPreferences.userName = input.value.trim();
     savePreferences();
-    showToast("Profile name updated!");
+    updateUserNameDisplay();
+    closeLoginModal();
+    showToast("Profile name updated: " + userPreferences.userName);
   }
+}
+
+function updateUserNameDisplay() {
+  const display = document.getElementById('userDisplayName');
+  if (display) display.textContent = userPreferences.userName || 'Panth';
+}
+
+function editProfileName() {
+  openLoginModal();
+}
+
+function shareApp() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Surat BRTS Digital Transit Pass',
+      text: 'Book digital BRTS bus tickets instantly with GoRutes!',
+      url: window.location.href
+    }).catch(console.error);
+  } else {
+    navigator.clipboard?.writeText(window.location.href);
+    showToast("App link copied to clipboard!");
+  }
+}
+
+function deleteAccount() {
+  if (confirm("Are you sure you want to reset your profile name to default?")) {
+    userPreferences.userName = "Panth";
+    savePreferences();
+    updateUserNameDisplay();
+    toggleMenu(false);
+    showToast("Profile reset to Panth");
+  }
+}
+
+function logoutUser() {
+  toggleMenu(false);
+  openLoginModal();
 }
 
 // Dark Mode Toggle
