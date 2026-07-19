@@ -117,6 +117,18 @@ function navigateTo(pageId, pushToBrowserHistory = true) {
     activeNavBtn.classList.add('active');
   }
 
+  // Toggle bottom navigation bar and body padding depending on the active page
+  const bottomNav = document.querySelector('.bottom-nav');
+  if (bottomNav) {
+    if (pageId === 'payment-details') {
+      bottomNav.style.display = 'none';
+      document.body.style.paddingBottom = '0';
+    } else {
+      bottomNav.style.display = 'flex';
+      document.body.style.paddingBottom = '76px';
+    }
+  }
+
   // Push browser history state for mobile hardware/gesture back button support
   if (pushToBrowserHistory && window.history) {
     try {
