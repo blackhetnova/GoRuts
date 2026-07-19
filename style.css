@@ -902,18 +902,22 @@ body {
 }
 
 .ticket-header {
-  background: linear-gradient(135deg, var(--success), #2bb04c);
-  color: white;
+  background: #ffffff;
+  color: var(--primary);
+  border-bottom: 1px solid var(--border);
   padding: 16px;
   text-align: center;
 }
 
 .ticket-header.expired {
   background: linear-gradient(135deg, var(--danger), #e02b20);
+  color: white;
 }
 
 .ticket-header.suman {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: #ffffff;
+  color: var(--primary);
+  border-bottom: 1px solid var(--border);
 }
 
 .ticket-status-title {
@@ -928,7 +932,8 @@ body {
 
 .ticket-status-subtitle {
   font-size: 11px;
-  opacity: 0.9;
+  color: var(--text-secondary);
+  opacity: 1;
 }
 
 .ticket-qr-section {
@@ -1104,7 +1109,7 @@ body {
 }
 
 .fare-breakdown-row.total .price {
-  color: var(--success);
+  color: var(--primary);
   font-size: 17px;
 }
 
