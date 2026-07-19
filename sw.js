@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gorutes-v13';
+const CACHE_NAME = 'gorutes-v14';
 const ASSETS = [
   './',
   './index.html',
@@ -6,7 +6,7 @@ const ASSETS = [
   './app.js',
   './icon.png',
   './gorutes_logo.png',
-  './surat_smart_city.png',
+  './surat_smart_city_banner_v2.png',
   './surat_route_map_official.png',
   './manifest.json',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
