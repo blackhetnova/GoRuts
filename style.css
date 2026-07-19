@@ -319,7 +319,7 @@ body {
 
 .trip-action-btn {
   padding: 10px 16px;
-  border-radius: 24px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
