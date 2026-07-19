@@ -151,6 +151,24 @@
       </div>
     </div>
 
+    <!-- Install App Banner -->
+    <div class="install-app-banner" id="installBanner" style="display:none">
+      <div class="install-banner-content">
+        <div class="install-banner-icon">
+          <i class="fas fa-download"></i>
+        </div>
+        <div class="install-banner-text">
+          <h3>Install GoRutes App</h3>
+          <p>Add to home screen for the best experience — works offline!</p>
+        </div>
+        <button class="install-banner-btn" id="installBtn" onclick="installApp()">
+          <i class="fas fa-plus-circle"></i> Install
+        </button>
+      </div>
+      <button class="install-banner-close" onclick="dismissInstallBanner()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
     <!-- Recent Tickets generated -->
     <div class="section-card" style="margin-top:16px">
       <h2 class="section-title"><i class="fas fa-history" style="color:var(--secondary)"></i> Quick Re-book</h2>

@@ -1,12 +1,16 @@
 {
-  "name": "GoRutes - Bus Ticket & Simulator",
+  "name": "GoRutes - Surat BRTS Bus Ticket & Simulator",
   "short_name": "GoRutes",
-  "description": "GoRutes - Premium Surat BRTS Mobile Ticket Generator and PWA",
+  "description": "Premium Surat BRTS Digital Bus Ticket Generator with QR codes, trip planning, transit map & offline support",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#1e5aa8",
+  "background_color": "#0a0f1e",
   "theme_color": "#1e5aa8",
   "orientation": "portrait",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["transportation", "travel", "utilities"],
   "icons": [
     {
       "src": "icon.png",
@@ -18,7 +22,35 @@
       "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Ticket",
+      "short_name": "Book",
+      "description": "Book a new bus ticket",
+      "url": "./index.html",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Bookings",
+      "short_name": "Bookings",
+      "description": "View your booking history",
+      "url": "./index.html",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
     }
   ]
 }

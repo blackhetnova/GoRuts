@@ -1,10 +1,13 @@
-const CACHE_NAME = 'gorutes-v1';
+const CACHE_NAME = 'gorutes-v2';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './icon.png',
+  './gorutes_logo.png',
+  './surat_smart_city.png',
+  './manifest.json',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'
@@ -61,6 +64,16 @@ self.addEventListener('fetch', event => {
     caches.match(event.request)
       .then(cachedResponse => {
         if (cachedResponse) {
+          // Return cache but also update in background (stale-while-revalidate)
+          const fetchPromise = fetch(event.request).then(networkResponse => {
+            if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
+              const responseClone = networkResponse.clone();
+              caches.open(CACHE_NAME).then(cache => {
+                cache.put(event.request, responseClone).catch(() => {});
+              });
+            }
+            return networkResponse;
+          }).catch(() => {});
           return cachedResponse;
         }
         return fetch(event.request).then(networkResponse => {
@@ -69,7 +82,6 @@ self.addEventListener('fetch', event => {
             const responseClone = networkResponse.clone();
             caches.open(CACHE_NAME).then(cache => {
               cache.put(event.request, responseClone).catch(err => {
-                // Ignore silent duplicate/concurrent write errors
                 console.debug('[Service Worker] Cache put ignored:', err.message);
               });
             }).catch(err => {
@@ -79,6 +91,10 @@ self.addEventListener('fetch', event => {
           return networkResponse;
         }).catch(err => {
           console.log('[Service Worker] Fetch failed:', err);
+          // Return offline fallback for navigation requests
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
         });
       })
   );
