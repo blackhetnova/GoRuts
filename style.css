@@ -1,24 +1,29 @@
 :root {
-  /* Light Mode Colors - Utilitarian Government Service Palette */
-  --primary: #2563eb;
-  --primary-rgb: 37, 99, 235;
-  --primary-dark: #1d4ed8;
+  /* User-Defined Exact Color Palette */
+  --primary: #3664B7;
+  --primary-rgb: 54, 100, 183;
+  --primary-dark: #2a5298;
   --secondary: #e85d04;
-  --bg: #f4f5f8;
-  --card: #ffffff;
-  --text: #333333;
-  --text-secondary: #666666;
-  --text-placeholder: #999999;
-  --border: #d0d5dd;
+  --bg: #F5F5F5;
+  --card: #FFFFFF;
+  --text: #393B40;
+  --text-secondary: #B8B8B8;
+  --text-placeholder: #B8B8B8;
+  --icon-gray: #9C9DA0;
+  --icon-dark: #393B40;
+  --border: #E6E8E7;
+  --divider: #E6E8E7;
+  --hot-offer-bg: #292738;
+  --nav-inactive: #98B1DA;
+  --nav-active: #FFFFFF;
   --success: #28a745;
   --success-bg: rgba(40, 167, 69, 0.1);
   --danger: #dc3545;
   --danger-bg: rgba(220, 53, 69, 0.15);
   --warning: #ffc107;
-  --shadow: rgba(0, 0, 0, 0.05);
-  --shadow-lg: rgba(0, 0, 0, 0.1);
-  --header-bg: #ffffff;
-  --divider: #e0e0e0;
+  --shadow: rgba(0, 0, 0, 0.04);
+  --shadow-lg: rgba(0, 0, 0, 0.08);
+  --header-bg: #FFFFFF;
 }
 
 [data-theme="dark"] {
@@ -162,7 +167,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text);
+  color: #9C9DA0;
   padding: 6px;
   border-radius: 50%;
   display: flex;
@@ -185,18 +190,18 @@ body {
 }
 
 .search-bar {
-  background: var(--card);
-  border: 1px solid #d0d5dd;
+  background: #F5F5F5;
+  border: 1px solid #E6E8E7;
   border-radius: 12px !important;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: none;
 }
 
 .search-bar-icon {
-  color: #999;
+  color: #9C9DA0;
   font-size: 16px;
 }
 
@@ -205,22 +210,22 @@ body {
   background: none;
   outline: none;
   font-size: 14px;
-  color: var(--text);
+  color: #393B40;
   width: 100%;
   font-weight: 400;
 }
 
 .search-bar input::placeholder {
-  color: #aaa;
+  color: #B8B8B8;
   font-weight: 400;
 }
 
 .search-results-dropdown {
   display: none;
-  background: var(--card);
+  background: #FFFFFF;
   margin-top: 4px;
   border-radius: 12px;
-  border: 1px solid var(--border);
+  border: 1px solid #E6E8E7;
   max-height: 150px;
   overflow-y: auto;
   box-shadow: 0 4px 12px var(--shadow);
@@ -233,51 +238,47 @@ body {
   padding: 12px 16px 0;
 }
 
-.plan-trip-section {
-  padding: 12px 16px 0;
-}
-
 .plan-trip-title {
   font-size: 20px;
   font-weight: 500;
-  color: #333333;
+  color: #393B40;
   margin-bottom: 12px;
   letter-spacing: 0.3px;
 }
 
 .trip-form-container {
-  background: var(--card);
+  background: #FFFFFF;
   border-radius: 14px;
   padding: 18px 14px 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   position: relative;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #E6E8E7;
 }
 
 /* Trip Input Fields - Fieldset style matching Sitilink app */
 .trip-field {
-  border: 1px solid #d0d5dd;
+  border: 1px solid #E6E8E7;
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 14px;
   position: relative;
   cursor: pointer;
-  background: var(--card);
+  background: #FFFFFF;
 }
 
 .trip-field:active {
-  border-color: var(--primary);
+  border-color: #3664B7;
 }
 
 .trip-field-label {
   position: absolute;
   top: -9px;
   left: 12px;
-  background: var(--card);
+  background: #FFFFFF;
   padding: 0 4px;
   font-size: 14px;
   font-weight: 400;
-  color: #666666;
+  color: #B8B8B8;
 }
 
 .trip-field-inner {
@@ -292,14 +293,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666666;
+  color: #9C9DA0;
   font-size: 16px;
 }
 
 .trip-field-value {
   font-size: 15px;
   font-weight: 400;
-  color: #999999;
+  color: #B8B8B8;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -307,7 +308,7 @@ body {
 }
 
 .trip-field-value.selected {
-  color: #666666;
+  color: #393B40;
   font-weight: 400;
 }
 
@@ -318,21 +319,21 @@ body {
   top: 58px;
   width: 48px;
   height: 48px;
-  background: #ffffff;
-  border: 1px solid #dcdcdc;
+  background: #FFFFFF;
+  border: 1px solid #E6E8E7;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  color: #222222;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  color: #393B40;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .swap-btn:active {
-  background: #f4f5f8;
+  background: #F5F5F5;
   transform: scale(0.95);
 }
 
@@ -360,22 +361,22 @@ body {
 }
 
 .trip-action-btn.filled {
-  background: #2563eb !important;
-  color: #ffffff !important;
+  background: #3664B7 !important;
+  color: #FFFFFF !important;
 }
 
 .trip-action-btn.filled:active {
-  background: #1d4ed8 !important;
+  background: #2a5298 !important;
 }
 
 .trip-action-btn.outline {
-  background: #ffffff !important;
-  color: #333333 !important;
-  border: 1px solid #d0d5dd !important;
+  background: #FFFFFF !important;
+  color: #393B40 !important;
+  border: 1px solid #393B40 !important;
 }
 
 .trip-action-btn.outline:active {
-  background: #f4f5f8 !important;
+  background: #F5F5F5 !important;
 }
 
 /* Show Route & Fare Button */
@@ -384,19 +385,19 @@ body {
   padding: 14px;
   border: none;
   border-radius: 12px !important;
-  background: #2563eb !important;
-  color: #ffffff;
+  background: #3664B7 !important;
+  color: #FFFFFF;
   font-size: 15px;
   font-weight: 500 !important;
   cursor: pointer;
   text-align: center;
   letter-spacing: 0.4px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 12px rgba(54, 100, 183, 0.2);
 }
 
 .show-route-btn:active {
   transform: scale(0.98);
-  background: #1d4ed8 !important;
+  background: #2a5298 !important;
 }
 
 /* ======================== */
@@ -409,7 +410,7 @@ body {
 .hot-offer-title {
   font-size: 20px;
   font-weight: 500;
-  color: #333333;
+  color: #393B40;
   margin-bottom: 10px;
   letter-spacing: 0.3px;
 }
@@ -419,6 +420,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   padding: 6px 0;
+  background: transparent;
 }
 
 .hot-offer-img {
@@ -428,7 +430,7 @@ body {
   display: block !important;
   margin: 0 !important;
   border-radius: 16px !important;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12) !important;
+  box-shadow: 0 4px 14px rgba(41, 39, 56, 0.2) !important;
 }
 
 /* ======================== */
@@ -441,7 +443,7 @@ body {
   transform: translateX(-50%);
   width: 100%;
   max-width: 440px;
-  background: #2563eb;
+  background: #3664B7;
   display: flex;
   justify-content: space-around;
   padding: 8px 4px 10px;
@@ -455,7 +457,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #98B1DA;
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.3px;
@@ -472,17 +474,17 @@ body {
 .nav-item svg {
   width: 24px;
   height: 24px;
-  stroke: rgba(255, 255, 255, 0.85);
+  stroke: #98B1DA;
   transition: transform 0.2s ease, stroke 0.2s ease;
 }
 
 .nav-item.active {
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: 500;
 }
 
 .nav-item.active svg {
-  stroke: #ffffff;
+  stroke: #FFFFFF;
   stroke-width: 2.3;
 }
 
@@ -525,7 +527,7 @@ body {
   width: 82%;
   max-width: 320px;
   height: 100vh;
-  background: #2563eb;
+  background: #3664B7;
   z-index: 2000;
   transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2);
