@@ -69,7 +69,7 @@ body {
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
-  padding-bottom: 24px;
+  padding-bottom: 76px;
   position: relative;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.18);
   display: flex;
@@ -496,7 +496,7 @@ body {
 /* ======================== */
 .toast {
   position: fixed;
-  bottom: 30px;
+  bottom: 90px;
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   background: #333333;
