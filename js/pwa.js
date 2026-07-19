@@ -69,6 +69,15 @@ if ('serviceWorker' in navigator) {
       }).catch(err => {
         console.log('SW registration error:', err);
       });
+      
+    // Automatically reload the page if a new service worker takes over
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
   };
 
   if (document.readyState === 'complete') {
