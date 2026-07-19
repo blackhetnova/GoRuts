@@ -151,7 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Theme apply
   document.body.setAttribute('data-theme', userPreferences.theme);
   const themeToggle = document.getElementById('darkModeToggle');
-  if (userPreferences.theme === 'dark') {
+  if (themeToggle && userPreferences.theme === 'dark') {
     themeToggle.classList.add('checked');
   }
 
@@ -162,6 +162,23 @@ window.addEventListener('DOMContentLoaded', () => {
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     customTimeInput.value = now.toISOString().slice(0, 16);
   }
+
+  // Set initial browser history state for mobile hardware/gesture back button support
+  try {
+    if (window.history) {
+      window.history.replaceState({ page: 'home' }, '', '#home');
+    }
+  } catch(e) {}
+
+  // Handle hardware / gesture back button on Android & iOS mobile devices
+  window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.page) {
+      navigateTo(event.state.page, false);
+    } else {
+      // Prevent exiting the app, navigate back to home screen
+      navigateTo('home', false);
+    }
+  });
 });
 
 // Load preferences and bookings from localstorage
@@ -202,7 +219,7 @@ function savePreferences() {
 }
 
 // Navigation Router
-function navigateTo(pageId) {
+function navigateTo(pageId, pushToBrowserHistory = true) {
   // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   
@@ -218,6 +235,17 @@ function navigateTo(pageId) {
   const activeNavBtn = document.getElementById('nav-btn-' + pageId);
   if (activeNavBtn) {
     activeNavBtn.classList.add('active');
+  }
+
+  // Push browser history state for mobile hardware/gesture back button support
+  if (pushToBrowserHistory && window.history) {
+    try {
+      if (!window.history.state || window.history.state.page !== pageId) {
+        window.history.pushState({ page: pageId }, '', '#' + pageId);
+      }
+    } catch(e) {
+      console.warn("History push state notice:", e);
+    }
   }
   
   // Page specific render triggers
@@ -240,9 +268,11 @@ function navigateTo(pageId) {
 
 function goBack() {
   if (pageHistory.length > 0) {
-    navigateTo(pageHistory.pop());
+    const prevPage = pageHistory.pop();
+    navigateTo(prevPage, false);
   } else {
-    navigateTo('home');
+    // Return to home screen instead of exiting app
+    navigateTo('home', false);
   }
 }
 
