@@ -109,7 +109,7 @@ body {
 /* HEADER - GoRutes Style  */
 /* ======================== */
 .header {
-  background: var(--header-bg);
+  background: transparent;
   padding: 14px 16px;
   display: flex;
   align-items: center;
@@ -117,8 +117,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 8px var(--shadow);
+  border-bottom: none;
+  box-shadow: none;
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
@@ -133,14 +133,14 @@ body {
 
 /* Home page header - white with logo */
 .header-home {
-  background: #ffffff;
+  background: transparent;
   padding: 10px 16px;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-bottom: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .header-home {
-  background: var(--header-bg);
+  background: transparent;
 }
 
 .header-logo {

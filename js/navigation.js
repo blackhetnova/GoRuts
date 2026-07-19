@@ -32,7 +32,7 @@ function navigateTo(pageId, pushToBrowserHistory = true) {
   // Toggle bottom navigation bar and body padding depending on the active page
   const bottomNav = document.querySelector('.bottom-nav');
   if (bottomNav) {
-    if (pageId === 'payment-details') {
+    if (pageId === 'payment-details' || pageId === 'checkout') {
       bottomNav.style.display = 'none';
       document.body.style.paddingBottom = '0';
     } else {
