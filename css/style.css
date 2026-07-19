@@ -60,6 +60,9 @@
 
 html {
   background: #dce2eb;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 [data-theme="dark"] html {
@@ -69,6 +72,8 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
+  font-weight: 300;
+  font-size: 13px;
   max-width: 440px;
   width: 100%;
   margin: 0 auto;

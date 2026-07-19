@@ -232,12 +232,12 @@ function adjustSimTimestamp() {
     const now = Date.now();
     if (mode === 'current') {
       currentTicket.purchaseTime = now;
-      currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(now) : now + (1.5 * 60 * 60 * 1000);
+      currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(now) : now + (2 * 60 * 60 * 1000);
       currentTicket.status = 'valid';
     } else if (mode === 'yesterday') {
       const yesterday = now - (24 * 60 * 60 * 1000);
       currentTicket.purchaseTime = yesterday;
-      currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(yesterday) : yesterday + (1.5 * 60 * 60 * 1000);
+      currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(yesterday) : yesterday + (2 * 60 * 60 * 1000);
       currentTicket.status = 'expired';
     }
     
@@ -256,7 +256,7 @@ function applyCustomTimestamp() {
   const timeMs = customDate.getTime();
   
   currentTicket.purchaseTime = timeMs;
-  currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(timeMs) : timeMs + (1.5 * 60 * 60 * 1000);
+  currentTicket.expiryTime = currentTicket.isSumanPravas ? getSumanExpiryTimeFor(timeMs) : timeMs + (2 * 60 * 60 * 1000);
   
   // Check if target is in the past
   if (Date.now() > currentTicket.expiryTime) {

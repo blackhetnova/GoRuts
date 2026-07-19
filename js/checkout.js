@@ -44,7 +44,7 @@ function proceedToPayment() {
     quantity: 1,
     paxCategory: "Adult (General)",
     purchaseTime: timestamp,
-    expiryTime: timestamp + (1.5 * 60 * 60 * 1000), // 1.5 hr validity
+    expiryTime: timestamp + (2 * 60 * 60 * 1000), // 2 hr validity
     status: 'valid'
   };
   
@@ -131,12 +131,10 @@ function selectPaymentMethod(method) {
   });
 }
 
-// ─── Suman Pravas Expiry Calculator (10 PM same day) ────────────
+// ─── Suman Pravas Expiry Calculator (IST End of Day) ────────────
 function getSumanExpiryTimeFor(timestamp) {
-  const expiry = new Date(timestamp);
-  expiry.setHours(22, 0, 0, 0);
-  if (timestamp > expiry.getTime()) {
-    expiry.setDate(expiry.getDate() + 1);
-  }
-  return expiry.getTime();
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const d = new Date(timestamp + istOffset);
+  d.setUTCHours(23, 59, 59, 999);
+  return d.getTime() - istOffset;
 }
