@@ -142,14 +142,15 @@ body {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 8px;
 }
 
 .header-logo-img {
   height: 44px;
   object-fit: contain;
   max-width: 220px;
-  border-radius: 6px;
+  border-radius: 0px !important;
 }
 
 .header-action {
