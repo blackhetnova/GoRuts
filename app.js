@@ -1297,6 +1297,77 @@ function getMapNodeId(stationName) {
   return "";
 }
 
+// Google Maps Navigation & View Switchers
+function openInGoogleMaps() {
+  let query = "Surat BRTS";
+  if (selectedFrom && selectedTo) {
+    query = `from ${selectedFrom} to ${selectedTo} Surat`;
+  } else if (selectedFrom) {
+    query = `${selectedFrom} Surat`;
+  }
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  window.open(mapsUrl, '_blank');
+}
+
+function toggleMapSource() {
+  const gContainer = document.getElementById('googleMapsContainer');
+  const lContainer = document.getElementById('leafletMap');
+  const label = document.getElementById('mapSourceLabel');
+  
+  if (gContainer.style.display === 'none') {
+    gContainer.style.display = 'block';
+    lContainer.style.display = 'none';
+    if (label) label.innerHTML = '<i class="fas fa-layer-group"></i> Google / OSM';
+    showToast('Switched to Google Maps View');
+  } else {
+    gContainer.style.display = 'none';
+    lContainer.style.display = 'block';
+    if (label) label.innerHTML = '<i class="fas fa-map"></i> OpenStreetMap';
+    initLeafletMap();
+    showToast('Switched to Interactive OpenStreetMap View');
+  }
+}
+
+function switchMapViewMode(mode) {
+  const modes = ['interactive', 'official', 'schematic'];
+  modes.forEach(m => {
+    const section = document.getElementById('mapView' + m.charAt(0).toUpperCase() + m.slice(1));
+    const btn = document.getElementById('tabMap' + m.charAt(0).toUpperCase() + m.slice(1) + 'Btn');
+    if (section) section.style.display = (m === mode) ? 'block' : 'none';
+    if (btn) {
+      if (m === mode) btn.classList.add('active');
+      else btn.classList.remove('active');
+    }
+  });
+
+  if (mode === 'interactive') {
+    showToast('🗺️ Live Surat City Map');
+  } else if (mode === 'official') {
+    showToast('📜 Official Surat Route Map (SMC)');
+  } else if (mode === 'schematic') {
+    showToast('📊 Transit Line Schematic Map');
+    updateMapHighlight();
+  }
+}
+
+function locateUserOnMap() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords;
+      showToast(`📍 Your Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+      // Update iframe source centered near user if in Surat
+      const gIframe = document.getElementById('googleMapsIframe');
+      if (gIframe) {
+        gIframe.src = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d30000!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin`;
+      }
+    }, err => {
+      showToast('📍 Showing Surat City Center');
+    });
+  } else {
+    showToast('Geolocation not supported by your browser');
+  }
+}
+
 // PWA Install Prompt Handler
 let deferredPrompt = null;
 

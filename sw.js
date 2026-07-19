@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gorutes-v2';
+const CACHE_NAME = 'gorutes-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -7,10 +7,13 @@ const ASSETS = [
   './icon.png',
   './gorutes_logo.png',
   './surat_smart_city.png',
+  './surat_route_map_official.png',
   './manifest.json',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
+  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
 ];
 
 // Install Event - Caches local assets (robust with individual catches)
