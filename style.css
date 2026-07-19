@@ -147,9 +147,9 @@ body {
 }
 
 .header-logo-img {
-  height: 52px;
+  height: 64px;
   object-fit: contain;
-  max-width: 250px;
+  max-width: 290px;
   border-radius: 0px !important;
   border: none !important;
   outline: none !important;
