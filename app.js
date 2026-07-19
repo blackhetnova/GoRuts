@@ -478,7 +478,7 @@ function calculateFare(from, to) {
 
 // Trim BRTS suffix for ticket displays
 function getShortStopName(stopName) {
-  if (!stopName) return "STATION";
+  if (!stopName) return "Select Station";
   return stopName.replace(/ BRTS$/i, "").replace(/\s+/g, " ").trim();
 }
 
