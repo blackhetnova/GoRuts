@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -109,7 +109,7 @@
           <div class="trip-field-label">From</div>
           <div class="trip-field-inner">
             <div class="trip-field-icon">
-              <i class="fas fa-bus-alt"></i>
+              <i class="fas fa-bus"></i>
             </div>
             <div class="trip-field-value" id="fromStopLabel">Select Source</div>
           </div>
@@ -125,7 +125,7 @@
           <div class="trip-field-label">To</div>
           <div class="trip-field-inner">
             <div class="trip-field-icon">
-              <i class="fas fa-bus-alt"></i>
+              <i class="fas fa-bus"></i>
             </div>
             <div class="trip-field-value" id="toStopLabel">Select Destination</div>
           </div>
@@ -133,16 +133,16 @@
 
         <!-- Action Buttons Row -->
         <div class="trip-actions-row">
-          <button class="trip-action-btn filled" style="border-radius: 10px !important;" onclick="showToast('BRTS live timetable synced')">
+          <button class="trip-action-btn filled" style="border-radius: 8px !important; font-weight: 500 !important; font-size: 13px !important; background: #3467bf !important;" onclick="showToast('BRTS live timetable synced')">
             <span>Refresh data</span>
           </button>
-          <button class="trip-action-btn outline" style="border-radius: 10px !important; border: 1.5px solid #ccc !important;" onclick="generateSumanPravas()">
+          <button class="trip-action-btn outline" style="border-radius: 8px !important; font-weight: 500 !important; font-size: 13px !important; border: 1px solid #cccccc !important; color: #333333 !important; background: #ffffff !important;" onclick="generateSumanPravas()">
             <span>Suman Pravas</span>
           </button>
         </div>
 
         <!-- Show Route & Fare Button -->
-        <button class="show-route-btn" onclick="proceedToPayment()">
+        <button class="show-route-btn" style="border-radius: 8px !important; font-weight: 600 !important; font-size: 15px !important; background: #3467bf !important;" onclick="proceedToPayment()">
           Show Route & Fare
         </button>
       </div>

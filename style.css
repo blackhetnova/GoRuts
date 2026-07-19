@@ -214,33 +214,33 @@ body {
 }
 
 .plan-trip-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: #333333;
   margin-bottom: 12px;
 }
 
 .trip-form-container {
   background: var(--card);
-  border-radius: 16px;
-  padding: 20px 16px 16px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 18px 14px 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   position: relative;
 }
 
-/* Trip Input Fields - Fieldset style like real app */
+/* Trip Input Fields - Fieldset style like real Sitilink app */
 .trip-field {
-  border: 1.5px solid #ccc;
+  border: 1px solid #dcdcdc;
   border-radius: 8px;
-  padding: 10px 14px 10px 14px;
-  margin-bottom: 16px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
   position: relative;
   cursor: pointer;
   background: var(--card);
 }
 
 .trip-field:active {
-  border-color: var(--primary);
+  border-color: #3467bf;
 }
 
 .trip-field-label {
@@ -248,32 +248,32 @@ body {
   top: -9px;
   left: 12px;
   background: var(--card);
-  padding: 0 6px;
-  font-size: 12px;
+  padding: 0 4px;
+  font-size: 11px;
   font-weight: 500;
-  color: #666;
+  color: #666666;
 }
 
 .trip-field-inner {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .trip-field-icon {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary);
-  font-size: 18px;
+  color: #444444;
+  font-size: 16px;
 }
 
 .trip-field-value {
-  font-size: 15px;
-  font-weight: 500;
-  color: #888;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333333;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -281,28 +281,28 @@ body {
 }
 
 .trip-field-value.selected {
-  color: var(--text);
-  font-weight: 600;
+  color: #111111;
+  font-weight: 700;
 }
 
 /* Swap Button - positioned between From and To */
 .swap-btn {
   position: absolute;
-  right: 28px;
-  top: 76px;
-  width: 38px;
-  height: 38px;
+  right: 24px;
+  top: 70px;
+  width: 36px;
+  height: 36px;
   background: var(--card);
-  border: 1.5px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  color: var(--text);
-  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  color: #333333;
+  font-size: 15px;
 }
 
 .swap-btn:active {
@@ -318,10 +318,10 @@ body {
 }
 
 .trip-action-btn {
-  padding: 10px 16px !important;
-  border-radius: 10px !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
   cursor: pointer !important;
   text-align: center !important;
   display: flex !important;
@@ -332,42 +332,42 @@ body {
 }
 
 .trip-action-btn.filled {
-  background: var(--primary);
-  color: #fff;
+  background: #3467bf !important;
+  color: #ffffff !important;
 }
 
 .trip-action-btn.filled:active {
-  background: var(--primary-dark);
+  background: #28529a !important;
 }
 
 .trip-action-btn.outline {
-  background: transparent;
-  color: var(--text);
-  border: 1.5px solid #ccc;
+  background: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #cccccc !important;
 }
 
 .trip-action-btn.outline:active {
-  background: var(--bg);
+  background: #f5f5f5 !important;
 }
 
 /* Show Route & Fare Button */
 .show-route-btn {
   width: 100%;
-  padding: 14px;
+  padding: 13px;
   border: none;
-  border-radius: 10px;
-  background: var(--primary);
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
+  border-radius: 8px !important;
+  background: #3467bf !important;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600 !important;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+  box-shadow: 0 3px 8px rgba(52, 103, 191, 0.25);
 }
 
 .show-route-btn:active {
   transform: scale(0.98);
-  background: var(--primary-dark);
+  background: #28529a !important;
 }
 
 /* ======================== */
@@ -378,9 +378,9 @@ body {
 }
 
 .hot-offer-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: #333333;
   margin-bottom: 10px;
 }
 
