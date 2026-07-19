@@ -525,8 +525,8 @@ body {
 .side-menu {
   position: fixed;
   top: 0;
-  right: -100%;
-  left: auto;
+  right: -100% !important;
+  left: auto !important;
   width: 82%;
   max-width: 340px;
   height: 100vh;
@@ -539,7 +539,8 @@ body {
 }
 
 .side-menu.open {
-  right: 0;
+  right: 0 !important;
+  left: auto !important;
 }
 
 .menu-overlay {
