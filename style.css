@@ -131,9 +131,10 @@ body {
 }
 
 .header-logo-img {
-  height: 40px;
+  height: 44px;
   object-fit: contain;
-  max-width: 180px;
+  max-width: 220px;
+  border-radius: 6px;
 }
 
 .header-action {
