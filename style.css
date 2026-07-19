@@ -186,13 +186,13 @@ body {
 
 .search-bar {
   background: var(--card);
-  border: 1px solid #d0d0d0;
-  border-radius: 24px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px !important;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .search-bar-icon {
