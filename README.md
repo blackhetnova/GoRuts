@@ -1,7 +1,7 @@
 # 🚌 GoRutes — Surat BRTS Bus Ticket Generator & Simulator
 
 <p align="center">
-  <img src="gorutes_logo.png" alt="GoRutes Logo" width="200">
+  <img src="assets/gorutes_logo.png" alt="GoRutes Logo" width="200">
 </p>
 
 <p align="center">
@@ -122,13 +122,14 @@
 ```
 GoRuts/
 ├── index.html          # Main app HTML with all pages
-├── style.css           # Complete styling with CSS variables
-├── app.js              # Core JavaScript logic & data
 ├── sw.js               # Service Worker for offline caching
 ├── manifest.json       # PWA manifest configuration
-├── icon.png            # App icon (192x192 & 512x512)
-├── gorutes_logo.png    # GoRutes brand logo
-├── surat_smart_city.png # Promotional banner image
+├── css/
+│   └── style.css       # Complete styling with CSS variables
+├── js/
+│   ├── data.js         # Static configuration datasets (stops, routes, coordinates)
+│   └── app.js          # Core application logic & state management
+├── assets/             # Images, banners, and app icons
 └── README.md           # This file
 ```
 

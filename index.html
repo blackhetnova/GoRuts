@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="css/style.css?v=23">
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +17,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Surat Sitilink">
   <meta name="application-name" content="Surat Sitilink">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png?v=4">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=4">
   <link rel="manifest" href="manifest.json?v=4">
 </head>
 <body>
@@ -125,7 +125,7 @@
     <div class="top-logo-row" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px 4px;">
       <button class="header-action" onclick="toggleMenu(true)" title="Menu"><i class="fas fa-bars"></i></button>
       <div class="header-logo" style="flex: 1;">
-        <img src="gorutes_logo_v3.png" alt="Sitilink" class="header-logo-img">
+        <img src="assets/gorutes_logo_v3.png" alt="Sitilink" class="header-logo-img">
       </div>
     </div>
 
@@ -196,7 +196,7 @@
     <div class="hot-offer-section">
       <h2 class="hot-offer-title">Hot offer</h2>
       <div class="hot-offer-banner">
-        <img src="surat_smart_city_banner_v2.png" alt="Surat Smart City" class="hot-offer-img">
+        <img src="assets/surat_smart_city_banner_v2.png" alt="Surat Smart City" class="hot-offer-img">
       </div>
     </div>
 
@@ -541,7 +541,7 @@
           SURAT MUNICIPAL CORPORATION - BRTS & PT NETWORK MAP
         </div>
         <div class="official-map-wrapper" style="position: relative; overflow: auto; max-height: 480px; border-radius: 8px; border: 1px solid #eee;">
-          <img src="surat_route_map_official.png" id="officialMapImg" alt="Surat Official BRTS Route Map" style="width: 100%; min-width: 450px; height: auto; display: block;" />
+          <img src="assets/surat_route_map_official.png" id="officialMapImg" alt="Surat Official BRTS Route Map" style="width: 100%; min-width: 450px; height: auto; display: block;" />
         </div>
         <p style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">
           <i class="fas fa-search-plus"></i> Pinch or scroll to inspect full Surat BRTS & City Bus routes
@@ -890,6 +890,7 @@
   <!-- Core Javascript Libs and Logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
