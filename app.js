@@ -364,11 +364,20 @@ function showToast(message) {
 
 // Initialize default source & destination stops
 function setupInitialStops() {
-  selectedFrom = "Simada Junction BRTS";
-  selectedTo = "Nana Varachha BRTS";
+  selectedFrom = null;
+  selectedTo = null;
   
-  document.getElementById('fromStopLabel').textContent = selectedFrom;
-  document.getElementById('toStopLabel').textContent = selectedTo;
+  const fromLabel = document.getElementById('fromStopLabel');
+  const toLabel = document.getElementById('toStopLabel');
+  
+  if (fromLabel) {
+    fromLabel.textContent = "Select Source";
+    fromLabel.classList.remove('selected');
+  }
+  if (toLabel) {
+    toLabel.textContent = "Select Destination";
+    toLabel.classList.remove('selected');
+  }
 }
 
 // Open Stop selector list screen
