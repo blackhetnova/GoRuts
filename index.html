@@ -8,7 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,12 +81,12 @@
 
   <!-- HOME PAGE -->
   <div class="page active" id="page-home">
-    <!-- Direct Top Logo & Hamburger Button Row directly above search bar -->
-    <div class="top-logo-row" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 4px;">
-      <div class="header-logo">
+    <!-- Direct Top Logo & Hamburger Button Row (3-line menu on LEFT of logo) -->
+    <div class="top-logo-row" style="display: flex; align-items: center; gap: 8px; padding: 12px 16px 4px;">
+      <button class="header-action" onclick="toggleMenu(true)" title="Menu"><i class="fas fa-bars"></i></button>
+      <div class="header-logo" style="flex: 1;">
         <img src="gorutes_logo_v3.png" alt="Sitilink" class="header-logo-img">
       </div>
-      <button class="header-action" onclick="toggleMenu(true)" title="Menu"><i class="fas fa-bars"></i></button>
     </div>
 
     <!-- Search Bar -->
