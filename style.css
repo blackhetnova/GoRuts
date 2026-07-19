@@ -314,25 +314,26 @@ body {
 /* Swap Button - positioned between From and To */
 .swap-btn {
   position: absolute;
-  right: 24px;
-  top: 72px;
-  width: 36px;
-  height: 36px;
-  background: var(--card);
-  border: 1px solid #d0d5dd;
+  right: 20px;
+  top: 58px;
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-  color: #666666;
-  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: #222222;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .swap-btn:active {
-  background: var(--bg);
+  background: #f4f5f8;
+  transform: scale(0.95);
 }
 
 /* Action Buttons Row */
