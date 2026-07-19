@@ -1,11 +1,11 @@
-const CACHE_NAME = 'gorutes-v14';
+const CACHE_NAME = 'gorutes-v15';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './icon.png',
-  './gorutes_logo.png',
+  './gorutes_logo_v2.png',
   './surat_smart_city_banner_v2.png',
   './surat_route_map_official.png',
   './manifest.json',
