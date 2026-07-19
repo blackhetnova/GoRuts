@@ -1,7 +1,7 @@
-# 🚌 SITILINK — Surat BRTS Bus Ticket Generator & Simulator
+# 🚌 GoRutes — Surat BRTS Bus Ticket Generator & Simulator
 
 <p align="center">
-  <img src="sitilink_logo.png" alt="SITILINK Logo" width="200">
+  <img src="sitilink_logo.png" alt="GoRutes Logo" width="200">
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
 
 ## 📖 About
 
-**SITILINK** is a feature-rich, mobile-first Progressive Web App that simulates the Surat BRTS (Bus Rapid Transit System) digital ticketing experience. It allows users to plan trips, generate realistic QR-coded bus tickets, and explore the transit network — all from their browser.
+**GoRutes** is a feature-rich, mobile-first Progressive Web App that simulates the Surat BRTS (Bus Rapid Transit System) digital ticketing experience. It allows users to plan trips, generate realistic QR-coded bus tickets, and explore the transit network — all from their browser.
 
 > ⚠️ **Disclaimer**: This is a **simulator/demo project** and is NOT affiliated with the official Surat BRTS or Surat Municipal Corporation. It is built for educational and portfolio purposes only.
 
@@ -92,8 +92,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/sitilink.git
-   cd sitilink
+   git clone https://github.com/blackhetnova/GoRuts.git
+   cd GoRuts
    ```
 
 2. **Open in browser**
@@ -120,14 +120,14 @@
 ## 📂 Project Structure
 
 ```
-sitilink/
+GoRuts/
 ├── index.html          # Main app HTML with all pages
 ├── style.css           # Complete styling with CSS variables
 ├── app.js              # Core JavaScript logic & data
 ├── sw.js               # Service Worker for offline caching
 ├── manifest.json       # PWA manifest configuration
 ├── icon.png            # App icon (192x192 & 512x512)
-├── sitilink_logo.png   # SITILINK brand logo
+├── sitilink_logo.png   # GoRutes brand logo
 ├── surat_smart_city.png # Promotional banner image
 └── README.md           # This file
 ```

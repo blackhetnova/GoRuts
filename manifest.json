@@ -1,7 +1,7 @@
 {
-  "name": "SITILINK - Bus Ticket & Simulator",
-  "short_name": "SITILINK",
-  "description": "Premium Surat BRTS Mobile Ticket Generator and PWA",
+  "name": "GoRutes - Bus Ticket & Simulator",
+  "short_name": "GoRutes",
+  "description": "GoRutes - Premium Surat BRTS Mobile Ticket Generator and PWA",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1e5aa8",

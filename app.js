@@ -144,7 +144,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // Load preferences and bookings from localstorage
 function loadUserData() {
   try {
-    const savedPrefs = localStorage.getItem('sitilink_prefs');
+    const savedPrefs = localStorage.getItem('gorutes_prefs');
     if (savedPrefs) {
       userPreferences = JSON.parse(savedPrefs);
       document.getElementById('userDisplayName').textContent = userPreferences.userName;
@@ -159,7 +159,7 @@ function loadUserData() {
   }
   
   try {
-    const savedHistory = localStorage.getItem('sitilink_history');
+    const savedHistory = localStorage.getItem('gorutes_history');
     if (savedHistory) {
       bookingHistory = JSON.parse(savedHistory);
     }
@@ -172,7 +172,7 @@ function loadUserData() {
 // Save preferences to storage
 function savePreferences() {
   try {
-    localStorage.setItem('sitilink_prefs', JSON.stringify(userPreferences));
+    localStorage.setItem('gorutes_prefs', JSON.stringify(userPreferences));
   } catch (e) {
     console.error("Failed to save preferences to localStorage:", e);
   }
@@ -458,7 +458,7 @@ function getShortStopName(stopName) {
   return stopName.replace(/ BRTS$/i, "").replace(/\s+/g, " ").trim();
 }
 
-// Generate unique ticket numbers (SITILINK standard)
+// Generate unique ticket numbers (GoRutes standard)
 function generateTicketNumber() {
   return "7101" + Math.floor(100000000000 + Math.random() * 900000000000).toString();
 }
@@ -697,9 +697,9 @@ function generateTicketQR(ticket) {
   const toShort = getShortStopName(ticket.toStop).replace(/\s/g, "_");
   
   if (ticket.isSumanPravas) {
-    qrPayload = `SITILINK:SUMAN_PRAVAS:${ticket.ticketNo}:ADULT:UNLIMITED:Rs${(ticket.netPayable * ticket.quantity).toFixed(1)}`;
+    qrPayload = `GoRutes:SUMAN_PRAVAS:${ticket.ticketNo}:ADULT:UNLIMITED:Rs${(ticket.netPayable * ticket.quantity).toFixed(1)}`;
   } else {
-    qrPayload = `SITILINK:${ticket.ticketNo}:${fromShort}:${toShort}:ADULT:${ticket.quantity}:Rs${(ticket.netPayable * ticket.quantity).toFixed(1)}`;
+    qrPayload = `GoRutes:${ticket.ticketNo}:${fromShort}:${toShort}:ADULT:${ticket.quantity}:Rs${(ticket.netPayable * ticket.quantity).toFixed(1)}`;
   }
   
   // Container cleanups
@@ -788,7 +788,7 @@ function startTicketTimer(ticket) {
 // Save list array state back to storage
 function saveHistoryToStorage() {
   try {
-    localStorage.setItem('sitilink_history', JSON.stringify(bookingHistory));
+    localStorage.setItem('gorutes_history', JSON.stringify(bookingHistory));
   } catch (e) {
     console.error("Failed to save booking history to localStorage:", e);
   }
@@ -1037,7 +1037,7 @@ function openTicketFromHistory(ticketId) {
 function clearHistory() {
   if (confirm("Are you sure you want to clear booking history logs?")) {
     bookingHistory = [];
-    localStorage.setItem('sitilink_history', JSON.stringify([]));
+    localStorage.setItem('gorutes_history', JSON.stringify([]));
     renderHistoryList();
     showToast("Booking history cleared");
   }
@@ -1046,8 +1046,8 @@ function clearHistory() {
 // Reset Simulator Preferences
 function resetSimulatorData() {
   if (confirm("Reset application defaults and preferences?")) {
-    localStorage.removeItem('sitilink_prefs');
-    localStorage.removeItem('sitilink_history');
+    localStorage.removeItem('gorutes_prefs');
+    localStorage.removeItem('gorutes_history');
     userPreferences = {
       theme: 'light',
       userName: 'Guest User',
@@ -1256,7 +1256,7 @@ if ('serviceWorker' in navigator) {
   const registerSW = () => {
     navigator.serviceWorker.register('./sw.js')
       .then(reg => {
-        console.log('SITILINK PWA registered successfully with scope:', reg.scope);
+        console.log('GoRutes PWA registered successfully with scope:', reg.scope);
       }).catch(err => {
         console.log('SW registration error:', err);
       });

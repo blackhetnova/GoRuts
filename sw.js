@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sitilink-v1';
+const CACHE_NAME = 'gorutes-v1';
 const ASSETS = [
   './',
   './index.html',
