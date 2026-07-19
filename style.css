@@ -990,13 +990,24 @@ body {
   100% { opacity: 1; }
 }
 
-.ticket-validity-note {
-  font-size: 10px;
-  color: var(--text-secondary);
-  background: var(--bg);
-  padding: 6px 12px;
-  border-radius: 8px;
-  margin-top: 4px;
+.ticket-validity-pill {
+  font-size: 11px;
+  color: #666;
+  background: #ebeaf2;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: inline-block;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.ticket-row-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* Dashed ticket separator */
@@ -1010,26 +1021,24 @@ body {
 
 .ticket-divider {
   width: 100%;
-  border-top: 2px dashed var(--border);
+  border-top: 1.5px dashed #ccc;
 }
 
 .ticket-divider-left, .ticket-divider-right {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: var(--bg);
   border-radius: 50%;
-  top: 0;
+  top: 1px;
 }
 
 .ticket-divider-left {
-  left: -10px;
-  box-shadow: inset -4px 0 4px rgba(0,0,0,0.02);
+  left: -9px;
 }
 
 .ticket-divider-right {
-  right: -10px;
-  box-shadow: inset 4px 0 4px rgba(0,0,0,0.02);
+  right: -9px;
 }
 
 /* Ticket Details card elements */
@@ -1039,52 +1048,29 @@ body {
 }
 
 .ticket-route-heading {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   text-align: center;
-  color: var(--text);
-  margin-bottom: 16px;
+  color: #333;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   line-height: 1.4;
-}
-
-.ticket-route-heading i {
-  color: var(--primary);
-  font-size: 13px;
-}
-
-.ticket-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 12px;
-  margin-bottom: 12px;
+  letter-spacing: 0.3px;
 }
 
 .ticket-info-label {
   font-size: 11px;
-  color: var(--text-secondary);
-  margin-bottom: 3px;
-  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 2px;
 }
 
 .ticket-info-value {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.passenger-details-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 12px;
-  margin-bottom: 12px;
+  font-weight: 700;
+  color: #111;
 }
 
 .fare-breakdown {
@@ -1097,21 +1083,22 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: #666;
 }
 
 .fare-breakdown-row.total {
-  border-top: 1px solid var(--border);
-  padding-top: 8px;
-  margin-top: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
+  border-top: none;
+  padding-top: 2px;
+  margin-top: 0;
+  font-size: 13px;
+  font-weight: 800;
+  color: #111;
 }
 
 .fare-breakdown-row.total .price {
-  color: var(--primary);
-  font-size: 17px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 /* ======================== */

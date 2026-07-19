@@ -304,36 +304,34 @@
     </div>
   </div>
 
-  <!-- TICKET / PAYMENT DETAILS PAGE -->
+  <!-- TICKET / PAYMENT DETAILS PAGE (100% Match with Reference Image) -->
   <div class="page" id="page-payment-details">
-    <div class="header">
-      <button class="header-action" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-      <h1>Bus Ticket</h1>
+    <div class="header" style="background: transparent; border-bottom: none;">
+      <button class="header-action" onclick="goBack()"><i class="fas fa-chevron-left"></i></button>
+      <h1 style="font-size: 17px; font-weight: 600; color: #222;">Payment Details</h1>
       <button class="header-action" onclick="window.print()"><i class="fas fa-print"></i></button>
     </div>
 
-    <!-- Live Ticket Visual -->
+    <!-- Live Ticket Visual Card -->
     <div class="ticket-wrapper" id="ticketVisualArea">
-      <!-- Header -->
-      <div class="ticket-header" id="ticketStatusHeader" style="background: #ffffff !important; color: var(--primary) !important; border-bottom: 1px solid var(--border) !important;">
-        <div class="ticket-status-title" id="ticketStatusText" style="color: var(--primary) !important;">
-          VALID TICKET
-        </div>
-        <div class="ticket-status-subtitle" style="color: var(--text-secondary) !important;">Scan at the smart entry gate & enjoy your ride</div>
-      </div>
-
-      <!-- QR Code Section -->
+      <!-- QR Section -->
       <div class="ticket-qr-section">
-        <div style="font-size:10px; color:var(--text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px">SURAT BRTS DIGITAL PASS</div>
+        <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 12px;">Scan at your boarding gate</div>
         <div class="ticket-qr-container" onclick="openFullQR()">
           <div id="qrcode"></div>
         </div>
-        <div style="font-size:10px; color:var(--text-secondary); margin-bottom:10px"><i class="fas fa-expand"></i> Tap QR to expand & scan</div>
-        <div class="ticket-no" id="displayTicketNo">7101000000000000</div>
+        <div style="font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 6px;">Click on QR code to expand</div>
+        <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
         
-        <!-- Live Countdown display -->
-        <div class="ticket-timer-display" id="displayCountdown">00:00:00</div>
-        <div class="ticket-validity-note" id="displayValidityNote">The validity period is 1 hr 30 mins</div>
+        <!-- Live Countdown display (01 : 59 : 50 format) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 26px; font-weight: 700; color: #111; margin: 4px 0 0;">01 : 59 : 50</div>
+      </div>
+
+      <!-- Validity Pill Container -->
+      <div style="padding: 0 16px 16px; text-align: center;">
+        <div class="ticket-validity-pill" id="displayValidityNote">
+          The validity period is 2 hours and the entry time is 15 minutes
+        </div>
       </div>
 
       <!-- Separator cut-out -->
@@ -345,54 +343,69 @@
 
       <!-- Details Section -->
       <div class="ticket-details-section">
-        <!-- Route details -->
+        <!-- Route Title -->
         <div class="ticket-route-heading" id="displayRouteTitle">
-          SOURCE <i class="fas fa-arrow-right"></i> DESTINATION
+          SIMADA JUNCTION... <i class="fas fa-long-arrow-alt-right" style="margin:0 4px; color:#555"></i> NANA VARACHHA ...
         </div>
 
-        <div class="ticket-info-grid">
+        <!-- Route & Ticket Number Row -->
+        <div class="ticket-row-group">
           <div>
-            <div class="ticket-info-label">Route codes</div>
-            <div class="ticket-info-value" id="displayRouteCodes">12U, 17AU</div>
+            <div class="ticket-info-label">Route number</div>
+            <div class="ticket-info-value" id="displayRouteCodes"><i class="fas fa-bus" style="font-size: 12px; margin-right: 4px;"></i> 12U, 17AU</div>
           </div>
-          <div>
-            <div class="ticket-info-label">Ticket Reference</div>
-            <div class="ticket-info-value" id="displayRefNo">710100000000</div>
+          <div style="text-align: right;">
+            <div class="ticket-info-label">Ticket number</div>
+            <div class="ticket-info-value" id="displayRefNo" style="font-size: 12px;">7101000116300361</div>
           </div>
+        </div>
+
+        <!-- Passenger Row -->
+        <div class="ticket-row-group">
+          <div style="width: 100%;">
+            <div class="ticket-info-label" style="margin-bottom: 6px;">Passenger</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-size: 12px; font-weight: 700; color: #111;">Adult</div>
+                <div style="font-size: 13px; font-weight: 500; color: #333;" id="displayPassengerQtyVal">1</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 12px; font-weight: 700; color: #111;">Total</div>
+                <div style="font-size: 13px; font-weight: 500; color: #333;" id="displayPassengerTotalVal">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction Date & Time Row -->
+        <div class="ticket-row-group">
           <div>
             <div class="ticket-info-label">Transaction Date</div>
-            <div class="ticket-info-value" id="displayTransDate">12/06/2026</div>
+            <div class="ticket-info-value" id="displayTransDate">12/06/26</div>
           </div>
-          <div>
+          <div style="text-align: right;">
             <div class="ticket-info-label">Transaction Time</div>
-            <div class="ticket-info-value" id="displayTransTime">10:45 AM</div>
+            <div class="ticket-info-value" id="displayTransTime">10:47:51</div>
           </div>
         </div>
 
-        <div class="passenger-details-row">
-          <div>
-            <div class="ticket-info-label">Passenger category</div>
-            <div class="ticket-info-value" id="displayPassengerCat">Adult (General)</div>
-          </div>
-          <div style="text-align:right">
-            <div class="ticket-info-label">Quantity</div>
-            <div class="ticket-info-value" id="displayPassengerQty">1 Ticket</div>
-          </div>
-        </div>
-
-        <!-- Fare info -->
-        <div class="fare-breakdown">
+        <!-- Fare Breakdown -->
+        <div class="fare-breakdown" style="padding-top: 4px;">
           <div class="fare-breakdown-row">
-            <span>Base Ticket Fare</span>
-            <span id="displayBaseFare">Rs 10.0</span>
+            <span>Total Fare</span>
+            <span id="displayBaseFare">₹ 10.0</span>
           </div>
           <div class="fare-breakdown-row">
-            <span>Mobile Booking Discount (20%)</span>
-            <span id="displayDiscount">Rs -2.0</span>
+            <span>Discount Amount</span>
+            <span id="displayDiscount">₹ 2.0</span>
+          </div>
+          <div class="fare-breakdown-row">
+            <span>Fare Amount</span>
+            <span id="displayFareAmount">₹ 8.0</span>
           </div>
           <div class="fare-breakdown-row total">
-            <span>Net Payable (Inc. taxes)</span>
-            <span class="price" id="displayNetPayable">Rs 8.0</span>
+            <span>Net Payable</span>
+            <span class="price" id="displayNetPayable">₹ 8.0</span>
           </div>
         </div>
       </div>

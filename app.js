@@ -699,82 +699,50 @@ function confirmAndPay() {
 // Render dynamic elements of the ticket
 function renderTicketDetails(ticket) {
   // Save dynamic variables reference
-  const fromShort = getShortStopName(ticket.fromStop);
-  const toShort = getShortStopName(ticket.toStop);
+  const fromShort = getShortStopName(ticket.fromStop).toUpperCase();
+  const toShort = getShortStopName(ticket.toStop).toUpperCase();
   
-  // Set date values
+  // Set date values (dd/mm/yy & hh:mm:ss)
   const dateObj = new Date(ticket.purchaseTime);
-  const dateStr = dateObj.toLocaleDateString('en-GB'); // dd/mm/yyyy
-  const timeStr = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = String(dateObj.getFullYear()).slice(-2);
+  const dateStr = `${day}/${month}/${year}`;
+  
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const mins = String(dateObj.getMinutes()).padStart(2, '0');
+  const secs = String(dateObj.getSeconds()).padStart(2, '0');
+  const timeStr = `${hours}:${mins}:${secs}`;
   
   // Update fields
   document.getElementById('displayTicketNo').textContent = ticket.ticketNo;
-  document.getElementById('displayRefNo').textContent = ticket.refNo;
+  document.getElementById('displayRefNo').textContent = ticket.refNo || ticket.ticketNo;
   document.getElementById('displayTransDate').textContent = dateStr;
   document.getElementById('displayTransTime').textContent = timeStr;
   
-  // Multiplier fare displays
-  document.getElementById('displayBaseFare').textContent = `Rs ${(ticket.baseFare * ticket.quantity).toFixed(1)}`;
-  document.getElementById('displayDiscount').textContent = `Rs - ${(ticket.discount * ticket.quantity).toFixed(1)}`;
-  document.getElementById('displayNetPayable').textContent = `Rs ${(ticket.netPayable * ticket.quantity).toFixed(1)}`;
+  // Multiplier fare displays with Rupee symbol
+  const totalBase = (ticket.baseFare * ticket.quantity);
+  const totalDisc = (ticket.discount * ticket.quantity);
+  const netPay = (ticket.netPayable * ticket.quantity);
   
-  // Passenger qty
-  document.getElementById('displayPassengerQty').textContent = `${ticket.quantity} Ticket${ticket.quantity > 1 ? 's' : ''}`;
+  document.getElementById('displayBaseFare').textContent = `₹ ${totalBase.toFixed(1)}`;
+  document.getElementById('displayDiscount').textContent = `₹ ${totalDisc.toFixed(1)}`;
+  document.getElementById('displayFareAmount').textContent = `₹ ${netPay.toFixed(1)}`;
+  document.getElementById('displayNetPayable').textContent = `₹ ${netPay.toFixed(1)}`;
+  
+  // Passenger qty values
+  document.getElementById('displayPassengerQtyVal').textContent = ticket.quantity;
+  document.getElementById('displayPassengerTotalVal').textContent = ticket.quantity;
+  
+  // Route title formatted uppercase
+  document.getElementById('displayRouteTitle').innerHTML = `${fromShort} <i class="fas fa-long-arrow-alt-right" style="margin:0 4px; color:#555"></i> ${toShort}`;
+  document.getElementById('displayRouteCodes').innerHTML = `<i class="fas fa-bus" style="font-size:12px; margin-right:4px;"></i> ${ticket.routes.join(', ')}`;
   
   // Generate QRs
   generateTicketQR(ticket);
   
   // Start countdown clock
   startTicketTimer(ticket);
-  
-  // Apply language translations & specific card details
-  translateTicketContent(ticket);
-}
-
-// Set texts according to active language and ticket type
-function translateTicketContent(ticket) {
-  const lang = userPreferences.language;
-  const labels = langText[lang];
-  const header = document.getElementById('ticketStatusHeader');
-  const statusText = document.getElementById('displayValidityNote');
-  
-  // Class resets
-  header.className = 'ticket-header';
-  
-  if (ticket.status === 'expired') {
-    header.classList.add('expired');
-    document.getElementById('ticketStatusText').innerHTML = labels.expired;
-    document.querySelector('.ticket-status-subtitle').textContent = labels.expiredDesc;
-    statusText.textContent = "Pass Validity Period Finished";
-  } else if (ticket.isSumanPravas) {
-    header.classList.add('suman');
-    document.getElementById('ticketStatusText').innerHTML = labels.suman;
-    document.querySelector('.ticket-status-subtitle').textContent = labels.sumanDesc;
-    statusText.textContent = "Suman Pravas daily pass - valid up to 10:00 PM today";
-  } else {
-    // Normal active ticket
-    if (ticket.status === 'scanned') {
-      document.getElementById('ticketStatusText').innerHTML = `SCANNED ENTRY`;
-      document.querySelector('.ticket-status-subtitle').textContent = "Validated at boarding gate terminal";
-    } else {
-      document.getElementById('ticketStatusText').innerHTML = labels.valid;
-      document.querySelector('.ticket-status-subtitle').textContent = labels.validDesc;
-    }
-    statusText.textContent = "Ticket validity is 1 hour 30 minutes. Gate entry time limit is 15 minutes.";
-  }
-  
-  // Render route codes & labels
-  if (ticket.isSumanPravas) {
-    document.getElementById('displayRouteTitle').innerHTML = `Suman Pravas Pass`;
-    document.getElementById('displayRouteCodes').innerHTML = `<i class="fas fa-route" style="color:var(--primary); margin-right:4px"></i> All routes`;
-    document.getElementById('displayPassengerCat').textContent = "Adult (Unlimited)";
-  } else {
-    const fromShort = getShortStopName(ticket.fromStop);
-    const toShort = getShortStopName(ticket.toStop);
-    document.getElementById('displayRouteTitle').innerHTML = `${fromShort} <i class="fas fa-arrow-right" style="color:var(--primary); margin:0 6px"></i> ${toShort}`;
-    document.getElementById('displayRouteCodes').innerHTML = `<i class="fas fa-bus" style="color:var(--primary); margin-right:4px"></i> ${ticket.routes.join(', ')}`;
-    document.getElementById('displayPassengerCat').textContent = labels.paxCat;
-  }
 }
 
 // Generate client QR codes using qrcodejs
@@ -864,7 +832,7 @@ function startTicketTimer(ticket) {
     const mStr = mins < 10 ? '0' + mins : mins;
     const sStr = secs < 10 ? '0' + secs : secs;
     
-    timerDisplay.textContent = `${hStr}:${mStr}:${sStr}`;
+    timerDisplay.textContent = `${hStr} : ${mStr} : ${sStr}`;
     timerDisplay.className = 'ticket-timer-display';
   }
   
