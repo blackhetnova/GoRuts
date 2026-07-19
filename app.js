@@ -549,7 +549,10 @@ function rebookSumanPravas() {
   generateSumanPravas();
 }
 
-// Process booking to show active ticket details screen
+let pendingTicket = null;
+let selectedPaymentMethodType = 'upi';
+
+// Process booking to open payment gateway checkout screen
 function proceedToPayment() {
   if (!selectedFrom || !selectedTo) {
     showToast("Please choose both source & destination stops!");
@@ -565,7 +568,7 @@ function proceedToPayment() {
   const ticketNum = generateTicketNumber();
   const timestamp = Date.now();
   
-  const newTicket = {
+  pendingTicket = {
     id: 'ticket_' + timestamp,
     ticketNo: ticketNum,
     refNo: ticketNum.substring(4, 16),
@@ -580,21 +583,10 @@ function proceedToPayment() {
     paxCategory: "Adult (General)",
     purchaseTime: timestamp,
     expiryTime: timestamp + (1.5 * 60 * 60 * 1000), // 1.5 hr validity
-    status: 'valid' // 'valid', 'scanned', 'expired'
+    status: 'valid'
   };
   
-  // Save to list & localstorage
-  bookingHistory.unshift(newTicket);
-  saveHistoryToStorage();
-  
-  // Set current and open page
-  currentTicket = newTicket;
-  pushHistory('home');
-  navigateTo('payment-details');
-  
-
-  renderTicketDetails(newTicket);
-  showToast("Ticket generated successfully!");
+  openCheckoutPage(pendingTicket);
 }
 
 // Generate Suman Pravas daily pass
@@ -603,7 +595,7 @@ function generateSumanPravas() {
   const timestamp = Date.now();
   const expiryTime = getSumanExpiryTimeFor(timestamp);
   
-  const newTicket = {
+  pendingTicket = {
     id: 'ticket_' + timestamp,
     ticketNo: ticketNum,
     refNo: ticketNum.substring(4, 16),
@@ -621,16 +613,87 @@ function generateSumanPravas() {
     status: 'valid'
   };
   
-  bookingHistory.unshift(newTicket);
-  saveHistoryToStorage();
-  
-  currentTicket = newTicket;
-  pushHistory('home');
-  navigateTo('payment-details');
-  
+  openCheckoutPage(pendingTicket);
+}
 
-  renderTicketDetails(newTicket);
-  showToast("Suman Pravas Pass created!");
+// Render checkout order summary & QR code for payment
+function openCheckoutPage(ticket) {
+  const fromShort = getShortStopName(ticket.fromStop);
+  const toShort = getShortStopName(ticket.toStop);
+  
+  document.getElementById('checkoutRouteTitle').innerHTML = `${fromShort} <i class="fas fa-arrow-right" style="font-size:12px"></i> ${toShort}`;
+  document.getElementById('checkoutAmount').textContent = `Rs ${ticket.netPayable.toFixed(1)}`;
+  document.getElementById('payNowAmountBtn').textContent = `Rs ${ticket.netPayable.toFixed(1)}`;
+  
+  // Render payment QR code
+  const upiQrContainer = document.getElementById('checkoutUPIQR');
+  if (upiQrContainer) {
+    upiQrContainer.innerHTML = '';
+    if (typeof QRCode !== 'undefined') {
+      const upiPayload = `upi://pay?pa=smc.sitilink@bank&pn=Surat%20BRTS&am=${ticket.netPayable.toFixed(1)}&cu=INR&tn=BRTS%20Pass%20${ticket.ticketNo}`;
+      new QRCode(upiQrContainer, {
+        text: upiPayload,
+        width: 140,
+        height: 140,
+        colorDark: "#1e5aa8",
+        colorLight: "#ffffff"
+      });
+    }
+  }
+
+  pushHistory('home');
+  navigateTo('checkout');
+}
+
+// Select payment method radio & show details box
+function selectPaymentMethod(method) {
+  selectedPaymentMethodType = method;
+  const methods = ['upi', 'card', 'netbanking'];
+  
+  methods.forEach(m => {
+    const box = document.getElementById(m === 'netbanking' ? 'netbankPayBox' : m + 'PayBox');
+    const item = document.getElementById('payItem' + (m === 'upi' ? 'UPI' : m.charAt(0).toUpperCase() + m.slice(1)));
+    const radio = document.getElementById('pay' + (m === 'upi' ? 'UPI' : m.charAt(0).toUpperCase() + m.slice(1)));
+    
+    if (box) box.style.display = (m === method) ? 'block' : 'none';
+    if (item) {
+      if (m === method) {
+        item.style.borderColor = 'var(--primary)';
+        item.style.borderWidth = '2px';
+      } else {
+        item.style.borderColor = 'var(--border)';
+        item.style.borderWidth = '1px';
+      }
+    }
+    if (radio) radio.checked = (m === method);
+  });
+}
+
+// Confirm Payment & Generate Digital Pass
+function confirmAndPay() {
+  if (!pendingTicket) return;
+  
+  const payBtn = document.getElementById('payNowBtn');
+  const originalHtml = payBtn.innerHTML;
+  
+  // Show processing animation
+  payBtn.disabled = true;
+  payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment...';
+  
+  setTimeout(() => {
+    payBtn.disabled = false;
+    payBtn.innerHTML = originalHtml;
+    
+    // Save pending ticket to history
+    bookingHistory.unshift(pendingTicket);
+    saveHistoryToStorage();
+    currentTicket = pendingTicket;
+    
+    navigateTo('payment-details');
+    renderTicketDetails(pendingTicket);
+    showToast("🎉 Payment Successful! Ticket Generated.");
+    pendingTicket = null;
+  }, 1200);
 }
 
 // Render dynamic elements of the ticket
