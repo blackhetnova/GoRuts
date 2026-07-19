@@ -1,14 +1,14 @@
 {
-  "id": "gorutes_surat_pwa",
-  "name": "GoRutes",
-  "short_name": "GoRutes",
-  "description": "GoRutes Surat BRTS Digital Ticket App",
+  "id": "surat_sitilink_pwa",
+  "name": "Surat Sitilink",
+  "short_name": "Surat Sitilink",
+  "description": "Surat Sitilink BRTS Official Digital Ticketing Service",
   "start_url": "./index.html?mode=standalone",
   "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "fullscreen", "minimal-ui"],
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#0099e5",
+  "theme_color": "#3664B7",
   "orientation": "portrait",
   "lang": "en",
   "prefer_related_applications": false,
@@ -20,22 +20,16 @@
       "purpose": "any"
     },
     {
-      "src": "icon.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icon.png",
-      "sizes": "192x192",
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     }
   ]
 }
