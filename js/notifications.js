@@ -12,13 +12,16 @@
 function renderNotifications() {
   const container = document.getElementById('alertsListArea');
   container.innerHTML = notificationsFeed.map(item => `
-    <div class="notification-item ${item.type === 'alert' ? 'alert' : ''}">
-      <div class="notification-header">
-        <span><i class="fas ${item.type === 'alert' ? 'fa-exclamation-triangle' : 'fa-info-circle'}"></i> ${item.type.toUpperCase()}</span>
-        <span>${item.time}</span>
+    <div style="background:#fff; border-radius:12px; margin: 16px; padding:16px; box-shadow:0 1px 8px rgba(0,0,0,0.06); font-family: 'Inter', sans-serif;">
+      <div style="text-align:center; font-size:14px; font-weight:700; color:#333; margin-bottom:16px;">
+        ${item.time}
       </div>
-      <div class="notification-title">${item.title}</div>
-      <div class="notification-body">${item.text}</div>
+      <div style="display:flex; align-items:flex-start;">
+        ${item.hasIcon ? '<i class="fas fa-bus" style="color:#1E88E5; font-size:18px; margin-right:12px; margin-top:2px; flex-shrink:0;"></i>' : ''}
+        <div style="font-size:13px; color:#555; line-height:1.6; font-weight: 400;">
+          ${item.text}
+        </div>
+      </div>
     </div>
   `).join('');
 }

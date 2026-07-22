@@ -80,10 +80,18 @@ const mapStationCoordinates = {
 
 // Notification alerts feed
 const notificationsFeed = [
-  { id: 1, type: 'alert', title: 'Route Delay Alert - Line 12U', text: 'Heavy traffic near Simada Junction is causing 10-15 minute delays on route 12U. Please plan accordingly.', time: 'Just now' },
-  { id: 2, type: 'info', title: 'Suman Pravas Discount', text: 'Buy daily Suman Pravas pass for only Rs 30 and enjoy unlimited travel across Surat BRTS all day!', time: '2 hours ago' },
-  { id: 3, type: 'info', title: 'Smart Entry Gate System', text: 'Surat Municipal Corporation is upgrading smart scanning terminals at all station entries for contactless ticketing.', time: '1 day ago' },
-  { id: 4, type: 'alert', title: 'Holiday Operations Notice', text: 'On coming Sunday, BRTS services will start operations at 6:00 AM instead of 5:30 AM.', time: '2 days ago' }
+  { 
+    id: 1, 
+    hasIcon: true,
+    time: '17 Jul 2026, 10:54 AM',
+    text: 'Ticket booking is now available on the Sitilink Mobile App. Book your journey quickly and conveniently. Happy Journey! 🚌' 
+  },
+  { 
+    id: 2, 
+    hasIcon: false,
+    time: '15 Jul 2026, 03:10 PM',
+    text: '📢 મહત્વપૂર્ણ સૂચના (તા. 16/07/2026)<br><br>ભગવાન શ્રી જગન્નાથજીની રથયાત્રાને અનુલક્ષીને ટ્રાફિક પોલીસ વિભાગના સૂચનાનુસાર તા. 16/07/2026ના રોજ સવારે 06:00 વાગ્યાથી કાર્યક્રમ પૂર્ણ થાય ત્યાં સુધી BRTS તથા City Bus સેવાના અનેક રૂટોમાં ફેરફાર કરવામાં આવ્યો છે.<br><br>🚌 BRTS રૂટ<br>❌ બંધ:13, 14, 17A, 18, 20, 21, 22<br><br>🔀 ડાયવર્ટ:23<br><br>↔ ટૂંકાવેલ:11, 15AA, 15CC, 16, 19<br><br>🚌 City Bus રૂટ<br>❌ બંધ રૂટ:1, 2, 105, 106R, 106S, 107J, 107JP, 112, 116BR, 116R, 126R, 127J, 137J, 146, 153R, 204, 205G, 205H,'
+  }
 ];
 
 // Languages translations
