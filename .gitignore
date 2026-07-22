@@ -37,3 +37,7 @@ build/
 *.bak
 *.tmp
 *.temp
+
+# Agents
+.agents/
+
