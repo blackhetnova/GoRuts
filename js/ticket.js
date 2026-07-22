@@ -197,20 +197,11 @@ function startTicketTimer(ticket) {
 function openFullQR() {
   if (currentTicket && currentTicket.status !== 'expired') {
     document.getElementById('qrModal').classList.add('show');
-    
-    // Set simulated scan check state
-    const gateStatus = document.getElementById('gateScanStatus');
-    if (currentTicket.status === 'scanned') {
-      gateStatus.innerHTML = `<i class="fas fa-check-double"></i> Scan Successful! Entry Authorized.`;
-      gateStatus.style.color = "var(--success)";
-    } else {
-      gateStatus.innerHTML = `<i class="fas fa-sync fa-spin"></i> Awaiting Gate Scan...`;
-      gateStatus.style.color = "var(--warning)";
-    }
   } else {
     showToast("Expired ticket QR cannot be expanded");
   }
 }
+
 
 function closeFullQR() {
   document.getElementById('qrModal').classList.remove('show');

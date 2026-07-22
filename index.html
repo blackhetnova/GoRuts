@@ -350,25 +350,25 @@
 
   <!-- TICKET / PAYMENT DETAILS PAGE (100% Match with Reference Image) -->
   <div class="page" id="page-payment-details">
-    <div class="header">
+    <div class="header" style="margin-bottom: 0 !important; border-bottom: none !important;">
       <button class="header-action" onclick="goBack()"><i class="fas fa-chevron-left"></i></button>
-      <h1 style="font-size: 17px; font-weight: 600; color: #222;">Payment Details</h1>
+      <h1 style="font-size: 17px; font-weight: 400; color: #222;">Payment Details</h1>
       <div style="width:36px"></div>
     </div>
 
-    <!-- Live Ticket Visual Card -->
-    <div class="ticket-wrapper" id="ticketVisualArea">
+    <!-- Live Ticket Visual Card (Starts directly under header with zero top gap) -->
+    <div class="ticket-wrapper" id="ticketVisualArea" style="margin-top: 0 !important; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;">
       <!-- QR Section (First Box) -->
-      <div class="ticket-qr-section" style="padding-bottom: 20px;">
-        <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 12px;">Scan at your boarding gate</div>
+      <div class="ticket-qr-section" style="padding-top: 12px; padding-bottom: 16px;">
+        <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 10px;">Scan at your boarding gate</div>
         <div class="ticket-qr-container" onclick="openFullQR()">
           <div id="qrcode"></div>
         </div>
-        <div style="font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 6px;">Click on QR code to expand</div>
+        <div style="font-size: 11px; color: #888; margin-top: 6px; margin-bottom: 4px;">Click on QR code to expand</div>
         <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
         
-        <!-- Live Countdown display (Increased height by 8px: font-size 24px, margin 8px 0) -->
-        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 24px; font-weight: 700; color: #111; margin: 8px 0; line-height: 28px;">01 : 59 : 50</div>
+        <!-- Live Countdown display (Reduced height by 3px: 21px, margin 5px 0) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 21px; font-weight: 700; color: #111; margin: 5px 0; line-height: 25px;">01 : 59 : 50</div>
       </div>
 
       <!-- Separator cut-out -->
@@ -379,9 +379,9 @@
       </div>
 
       <!-- Details Section (Second Box) -->
-      <div class="ticket-details-section">
+      <div class="ticket-details-section" style="padding-top: 12px;">
         <!-- Grey Description Pill (Placed in second box above stops) -->
-        <div style="margin-bottom: 16px; text-align: center;">
+        <div style="margin-bottom: 14px; text-align: center;">
           <div class="ticket-validity-pill" id="displayValidityNote">
             The validity period is 2 hours and the entry time is 15 minutes
           </div>
@@ -421,17 +421,18 @@
           </div>
         </div>
 
-        <!-- Transaction Date Row (Line 1 - no divider line between date and time) -->
-        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: none !important; margin-bottom: 4px; padding-bottom: 4px;">
+        <!-- Transaction Date Row (Line 1 - no bold on date value) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: none !important; margin-bottom: 2px; padding-bottom: 2px;">
           <div class="ticket-info-label">Transaction Date</div>
-          <div class="ticket-info-value" id="displayTransDate">12/06/26</div>
+          <div class="ticket-info-value" id="displayTransDate" style="font-weight: 400 !important; color: #333;">12/06/26</div>
         </div>
 
-        <!-- Transaction Time Row (Line 2) -->
+        <!-- Transaction Time Row (Line 2 - no bold on time value) -->
         <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
           <div class="ticket-info-label">Transaction Time</div>
-          <div class="ticket-info-value" id="displayTransTime">10:47:51</div>
+          <div class="ticket-info-value" id="displayTransTime" style="font-weight: 400 !important; color: #333;">10:47:51</div>
         </div>
+
 
 
         <!-- Fare Breakdown -->
@@ -709,16 +710,13 @@
     </button>
   </div>
 
-  <!-- Full Screen Expanded QR Modal -->
+  <!-- Full Screen Expanded QR Modal (Clean QR only) -->
   <div class="qr-modal" id="qrModal" onclick="closeFullQR()">
-    <div class="qr-modal-card" onclick="event.stopPropagation()">
-      <h3 style="margin-bottom:12px; color:#1c1c1e; font-size:16px; font-weight:700">Scan BRTS Smart Gate</h3>
-      <div id="qrcodeBig" style="margin: 0 auto; display:inline-block; padding:10px; background:white; border-radius:12px; border:1px solid #ddd"></div>
-      <p style="margin-top:14px; font-size:12px; color:#666; font-family:monospace" id="expandedTicketNo">7101000000000000</p>
-      <div style="margin-top:10px; font-size:14px; font-weight:700; color:var(--success)" id="gateScanStatus">
-        <i class="fas fa-sync fa-spin"></i> Awaiting Gate Scan...
-      </div>
+    <div class="qr-modal-card" onclick="event.stopPropagation()" style="background: white; padding: 18px; border-radius: 20px; display: inline-block;">
+      <div id="qrcodeBig" style="margin: 0 auto; display: inline-block; padding: 4px; background: white; border-radius: 12px;"></div>
     </div>
+  </div>
+
   <!-- User Profile / Login Modal -->
   <div class="qr-modal" id="loginModal" onclick="closeLoginModal()">
     <div class="qr-modal-card" onclick="event.stopPropagation()" style="max-width:340px; text-align:left; padding:22px;">
