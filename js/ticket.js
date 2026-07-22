@@ -67,7 +67,7 @@ function renderTicketDetails(ticket) {
   
   // Update fields
   document.getElementById('displayTicketNo').textContent = ticket.ticketNo;
-  document.getElementById('displayRefNo').textContent = ticket.refNo || ticket.ticketNo;
+  document.getElementById('displayRefNo').textContent = ticket.ticketNo;
   document.getElementById('displayTransDate').textContent = dateStr;
   document.getElementById('displayTransTime').textContent = timeStr;
   
