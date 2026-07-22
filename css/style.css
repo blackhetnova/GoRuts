@@ -1132,7 +1132,7 @@ html, body {
 
 .ticket-divider {
   width: 100%;
-  border-top: 1.5px dashed #000000 !important; /* solid black line */
+  border-top: 2.5px dashed #cccccc !important; /* bigger dashes with old light gray color */
 }
 
 .ticket-divider-left, .ticket-divider-right {
@@ -1185,9 +1185,11 @@ html, body {
 }
 
 #displayTransDate, #displayTransTime {
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   color: #111111 !important;
+  font-size: 13px !important;
 }
+
 
 
 .fare-breakdown {

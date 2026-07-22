@@ -143,13 +143,14 @@ function startTicketTimer(ticket) {
   const timerDisplay = document.getElementById('displayCountdown');
   if (!timerDisplay || !ticket) return;
 
-  // Ensure active ticket has a valid future expiry time
-  if (!ticket.expiryTime || ticket.expiryTime <= Date.now()) {
+  // Ensure active ticket has a valid 2-hour future expiry time
+  if (!ticket.expiryTime || (ticket.status !== 'expired' && ticket.expiryTime <= Date.now())) {
     ticket.expiryTime = Date.now() + (2 * 60 * 60 * 1000);
   }
   
   function tick() {
     if (!ticket) return;
+    const now = Date.now();
     
     // Check if force expired simulation
     if (ticket.status === 'expired') {
@@ -159,8 +160,7 @@ function startTicketTimer(ticket) {
       return;
     }
     
-    const now = Date.now();
-    let diff = ticket.expiryTime - now;
+    const diff = ticket.expiryTime - now;
     
     if (diff <= 0) {
       if (countdownTimer) clearInterval(countdownTimer);
@@ -169,12 +169,11 @@ function startTicketTimer(ticket) {
       
       timerDisplay.textContent = 'EXPIRED';
       timerDisplay.className = 'ticket-timer-display expired';
-      
       translateTicketContent(ticket);
       return;
     }
     
-    // Format live countdown (01 : 59 : 50)
+    // Format live countdown (01 : 59 : 59 -> 01 : 59 : 58 ...)
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
@@ -190,6 +189,7 @@ function startTicketTimer(ticket) {
   tick();
   countdownTimer = setInterval(tick, 1000);
 }
+
 
 
 
