@@ -86,7 +86,7 @@ function renderTicketDetails(ticket) {
   document.getElementById('displayPassengerTotalVal').textContent = ticket.quantity;
   
   // Route title formatted uppercase
-  document.getElementById('displayRouteTitle').innerHTML = `<span>${fromFormatted}</span><span style="margin:0 6px; color:#666; font-weight:400">→</span><span>${toFormatted}</span>`;
+  document.getElementById('displayRouteTitle').innerHTML = `<span>${fromFormatted}</span><span style="flex-shrink:0; margin:0 6px; color:#666; font-weight:400">→</span><span>${toFormatted}</span>`;
   document.getElementById('displayRouteCodes').innerHTML = `<i class="fas fa-bus" style="font-size:12px; margin-right:4px;"></i> ${ticket.routes.join(', ')}`;
   
   // Generate QRs

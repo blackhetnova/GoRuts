@@ -1217,6 +1217,14 @@ html, body {
   gap: 4px;
   line-height: 1.4;
   letter-spacing: 0.3px;
+  width: 100%;
+}
+
+.ticket-route-heading span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .ticket-info-label {
