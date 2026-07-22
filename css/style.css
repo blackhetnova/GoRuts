@@ -113,12 +113,13 @@ body {
 /* HEADER - GoRutes Style  */
 /* ======================== */
 .header {
-  background: transparent;
+  background: var(--bg);
   padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100;
   border-bottom: none;
   box-shadow: none;
