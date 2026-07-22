@@ -452,17 +452,21 @@
           </div>
         </div>
 
-        <!-- Transaction Date & Time Rows (Styled matching Total Fare / fare-breakdown-row) -->
-        <div class="fare-breakdown" style="padding-top: 4px; margin-bottom: 6px;">
-          <div class="fare-breakdown-row">
-            <span>Transaction Date</span>
-            <span id="displayTransDate">12/06/26</span>
-          </div>
-          <div class="fare-breakdown-row">
-            <span>Transaction Time</span>
-            <span id="displayTransTime">10:47:51</span>
-          </div>
+        <!-- Transaction Date Row (Line 1 - unbolded, dark color matching Total Fare) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: none !important; margin-bottom: 2px; padding-bottom: 2px;">
+          <div class="ticket-info-label">Transaction Date</div>
+          <div class="ticket-info-value" id="displayTransDate" style="font-weight: 400 !important; color: #111 !important; font-size: 13px;">12/06/26</div>
         </div>
+
+        <!-- Transaction Time Row (Line 2 - unbolded, dark color matching Total Fare) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="ticket-info-label">Transaction Time</div>
+          <div class="ticket-info-value" id="displayTransTime" style="font-weight: 400 !important; color: #111 !important; font-size: 13px;">10:47:51</div>
+        </div>
+
+
+
+
 
         <!-- Fare Breakdown -->
         <div class="fare-breakdown" style="padding-top: 4px;">
