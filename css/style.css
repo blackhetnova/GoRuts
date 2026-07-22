@@ -1080,17 +1080,14 @@ html, body {
 }
 
 .ticket-timer-display {
-  font-size: 18px !important;
+  font-size: 19.5px !important;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.8px;
   margin: 4px 0;
-  line-height: 22px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
-
-
-
 
 .ticket-timer-display.expired {
   color: var(--danger);
@@ -1134,7 +1131,7 @@ html, body {
 
 .ticket-divider {
   width: 100%;
-  border-top: 1.5px dashed #ccc;
+  border-top: 1.5px dashed #000000 !important; /* solid black line */
 }
 
 .ticket-divider-left, .ticket-divider-right {

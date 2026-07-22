@@ -137,60 +137,44 @@ function generateTicketQR(ticket) {
 }
 
 // ─── Live Countdown Timer ───────────────────────────────────────
-// ─── Live Countdown Timer ───────────────────────────────────────
 function startTicketTimer(ticket) {
   if (countdownTimer) clearInterval(countdownTimer);
   
   const timerDisplay = document.getElementById('displayCountdown');
+  if (!timerDisplay || !ticket) return;
+
+  // Ensure active ticket has a valid future expiry time
+  if (!ticket.expiryTime || ticket.expiryTime <= Date.now()) {
+    ticket.expiryTime = Date.now() + (2 * 60 * 60 * 1000);
+  }
   
   function tick() {
-    const now = Date.now();
+    if (!ticket) return;
     
     // Check if force expired simulation
     if (ticket.status === 'expired') {
-      clearInterval(countdownTimer);
+      if (countdownTimer) clearInterval(countdownTimer);
       timerDisplay.textContent = 'EXPIRED';
       timerDisplay.className = 'ticket-timer-display expired';
       return;
     }
     
-    let diff = (ticket.expiryTime || (now + 7200000)) - now;
-    
-    // If infinite timer mode is enabled, calculate dynamic ticking loop starting from 01:59:50
-    if (userPreferences.infiniteTimer) {
-      const startTime = ticket.purchaseTime || (now - 1000);
-      const elapsedSecs = Math.floor((now - startTime) / 1000);
-      const baseSecs = (1 * 3600) + (59 * 60) + 50; // 01:59:50
-      let remaining = baseSecs - (elapsedSecs % baseSecs);
-      if (remaining <= 0) remaining = baseSecs;
-      
-      const hours = Math.floor(remaining / 3600);
-      const mins = Math.floor((remaining % 3600) / 60);
-      const secs = remaining % 60;
-      
-      const hStr = String(hours).padStart(2, '0');
-      const mStr = String(mins).padStart(2, '0');
-      const sStr = String(secs).padStart(2, '0');
-      
-      timerDisplay.textContent = `${hStr} : ${mStr} : ${sStr}`;
-      timerDisplay.className = 'ticket-timer-display';
-      return;
-    }
+    const now = Date.now();
+    let diff = ticket.expiryTime - now;
     
     if (diff <= 0) {
-      clearInterval(countdownTimer);
+      if (countdownTimer) clearInterval(countdownTimer);
       ticket.status = 'expired';
       saveHistoryToStorage();
       
       timerDisplay.textContent = 'EXPIRED';
       timerDisplay.className = 'ticket-timer-display expired';
       
-      // Update header validation status to expired
       translateTicketContent(ticket);
       return;
     }
     
-    // Format live countdown
+    // Format live countdown (01 : 59 : 50)
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
@@ -206,6 +190,7 @@ function startTicketTimer(ticket) {
   tick();
   countdownTimer = setInterval(tick, 1000);
 }
+
 
 
 // ─── Expanded QR Modal ──────────────────────────────────────────

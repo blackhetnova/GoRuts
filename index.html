@@ -349,27 +349,28 @@
   </div>
 
   <!-- TICKET / PAYMENT DETAILS PAGE (100% Match with Reference Image) -->
-  <div class="page" id="page-payment-details">
-    <div class="header" style="margin-bottom: 0 !important; border-bottom: none !important;">
+  <div class="page" id="page-payment-details" style="padding-top: 0 !important;">
+    <div class="header" style="margin-bottom: 0 !important; border-bottom: none !important; padding-bottom: 0 !important;">
       <button class="header-action" onclick="goBack()"><i class="fas fa-chevron-left"></i></button>
       <h1 style="font-size: 17px; font-weight: 400; color: #222;">Payment Details</h1>
       <div style="width:36px"></div>
     </div>
 
-    <!-- Live Ticket Visual Card (Starts directly under header with zero top gap) -->
+    <!-- Live Ticket Visual Card (Starts directly under navbar end without margin gap) -->
     <div class="ticket-wrapper" id="ticketVisualArea" style="margin-top: 0 !important; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;">
       <!-- QR Section (First Box) -->
-      <div class="ticket-qr-section" style="padding-top: 12px; padding-bottom: 16px;">
-        <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 10px;">Scan at your boarding gate</div>
-        <div class="ticket-qr-container" onclick="openFullQR()">
+      <div class="ticket-qr-section" style="padding-top: 8px; padding-bottom: 12px;">
+        <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 4px;">Scan at your boarding gate</div>
+        <div class="ticket-qr-container" onclick="openFullQR()" style="margin-top: 4px; margin-bottom: 4px;">
           <div id="qrcode"></div>
         </div>
-        <div style="font-size: 11px; color: #888; margin-top: 6px; margin-bottom: 4px;">Click on QR code to expand</div>
+        <div style="font-size: 11px; color: #888; margin-top: 4px; margin-bottom: 4px;">Click on QR code to expand</div>
         <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
         
-        <!-- Live Countdown display (Width reduced by 3px) -->
-        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 18px; font-weight: 700; color: #111; margin: 4px 0; line-height: 22px; letter-spacing: 0.2px;">01 : 59 : 50</div>
+        <!-- Live Countdown display (Width increased by 1.5px) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 19.5px; font-weight: 700; color: #111; margin: 4px 0; line-height: 24px; letter-spacing: 0.8px;">01 : 59 : 50</div>
       </div>
+
 
       <!-- Separator cut-out -->
       <div class="ticket-divider-wrapper">
