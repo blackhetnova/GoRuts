@@ -1183,6 +1183,12 @@ html, body {
   color: #111;
 }
 
+#displayTransDate, #displayTransTime {
+  font-weight: 400 !important;
+  color: #111111 !important;
+}
+
+
 .fare-breakdown {
   display: flex;
   flex-direction: column;

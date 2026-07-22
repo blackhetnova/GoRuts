@@ -53,11 +53,36 @@ function navigateTo(pageId, pushToBrowserHistory = true) {
   }
   
   // Page specific render triggers
-  if (pageId === 'booking') {
+  if (pageId === 'payment-details') {
+    if (!currentTicket && bookingHistory.length > 0) {
+      currentTicket = bookingHistory[0];
+    }
+    if (!currentTicket) {
+      currentTicket = {
+        id: 'ticket_' + Date.now(),
+        ticketNo: '7101000116300361',
+        refNo: '7101000116300361',
+        fromStop: 'Simada Junction BRTS',
+        toStop: 'Nana Varachha BRTS',
+        isSumanPravas: false,
+        routes: ['12U', '17AU'],
+        baseFare: 10,
+        discount: 2,
+        netPayable: 8,
+        quantity: 1,
+        paxCategory: 'Adult (General)',
+        purchaseTime: Date.now(),
+        expiryTime: Date.now() + (2 * 60 * 60 * 1000),
+        status: 'valid'
+      };
+    }
+    renderTicketDetails(currentTicket);
+  } else if (pageId === 'booking') {
     renderHistoryList();
   } else if (pageId === 'notifications') {
     renderNotifications();
   } else if (pageId === 'map') {
+
     updateMapHighlight();
     initLeafletMap();
   } else if (pageId === 'home') {
