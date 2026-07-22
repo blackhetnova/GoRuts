@@ -43,11 +43,7 @@ function confirmAndPay() {
 function renderTicketDetails(ticket) {
   // Format dynamic variables reference
   function formatStopNameForRouteTitle(stopName) {
-    let clean = getShortStopName(stopName).toUpperCase();
-    if (clean.length > 17) {
-      return clean.substring(0, 16) + '...';
-    }
-    return clean;
+    return getShortStopName(stopName).toUpperCase();
   }
   
   const fromFormatted = formatStopNameForRouteTitle(ticket.fromStop);
