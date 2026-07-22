@@ -24,59 +24,102 @@ function renderHistoryList() {
   const container = document.getElementById('bookingsListArea');
   if (bookingHistory.length === 0) {
     container.innerHTML = `
-      <div style="text-align:center; padding:60px 24px; color:var(--text-secondary)">
-        <i class="fas fa-ticket-alt" style="font-size:48px; color:var(--border); margin-bottom:16px"></i>
-        <h3 style="font-size:16px; font-weight:700; margin-bottom:8px; color:var(--text)">No Active Passes found</h3>
-        <p style="font-size:12px; margin-bottom:20px">Book new digital ticket or daily travel card online instantly.</p>
-        <button class="btn-primary" onclick="navigateTo('home')" style="display:inline-flex; width:auto; padding:10px 24px">Book Now</button>
+      <div style="text-align:center; padding-top:30px; color:#555; font-size:16px;">
+        No Booking Available
       </div>
     `;
     return;
   }
   
-  // Filter tickets by current date or expiration state
-  const now = Date.now();
-  const filteredTickets = bookingHistory.filter(ticket => {
-    // Re-verify expiration live status
-    const isExpired = ticket.status === 'expired' || (!userPreferences.infiniteTimer && ticket.expiryTime <= now);
-    return activeHistoryTab === 'active' ? !isExpired : isExpired;
-  });
+  // Show all tickets, newest first
+  const tickets = [...bookingHistory].reverse();
   
-  if (filteredTickets.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:60px 24px; color:var(--text-secondary)">
-        <i class="fas fa-folder-open" style="font-size:40px; color:var(--border); margin-bottom:16px"></i>
-        <p style="font-size:13px">No tickets found in this category.</p>
-      </div>
-    `;
-    return;
-  }
-  
-  container.innerHTML = filteredTickets.map(ticket => {
+  container.innerHTML = tickets.map(ticket => {
     const isSuman = ticket.isSumanPravas;
     const dateObj = new Date(ticket.purchaseTime);
-    const dateStr = dateObj.toLocaleDateString('en-GB');
-    const timeStr = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
     
-    const badgeText = isSuman ? 'Suman Pravas' : (ticket.status === 'scanned' ? 'Scanned' : 'Valid');
-    const badgeClass = isSuman ? 'badge suman' : 'badge active';
+    // Format: "DD/MM/YYYY HH:mm:ss"
+    const dd = String(dateObj.getDate()).padStart(2, '0');
+    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const yyyy = dateObj.getFullYear();
+    const hh = String(dateObj.getHours()).padStart(2, '0');
+    const min = String(dateObj.getMinutes()).padStart(2, '0');
+    const ss = String(dateObj.getSeconds()).padStart(2, '0');
+    const txnDate = `${dd}/${mm}/${yyyy} ${hh}:${min}:${ss}`;
+
+    const expObj = new Date(ticket.expiryTime);
+    const edd = String(expObj.getDate()).padStart(2, '0');
+    const emm = String(expObj.getMonth() + 1).padStart(2, '0');
+    const eyyyy = expObj.getFullYear();
+    const ehh = String(expObj.getHours()).padStart(2, '0');
+    const emin = String(expObj.getMinutes()).padStart(2, '0');
+    const ess = String(expObj.getSeconds()).padStart(2, '0');
+    const expDate = `${edd}/${emm}/${eyyyy} ${ehh}:${emin}:${ess}`;
     
+    // Status color
+    const now = Date.now();
+    const isExpired = ticket.status === 'expired' || (!userPreferences.infiniteTimer && ticket.expiryTime <= now);
+    const statusText = isExpired ? 'Expired' : 'Active';
+    const statusColor = isExpired ? '#E53935' : '#43A047';
+
+    const orderId = ticket.id || "2026070116085300701";
+
+    let routeHtml = '';
+    if (isSuman) {
+      routeHtml = `${ticket.fromStop.toUpperCase()}`;
+    } else {
+      routeHtml = `${ticket.fromStop.toUpperCase()} <span style="color:#1E88E5;">TO</span><br>${ticket.toStop.toUpperCase()}`;
+    }
+
     return `
-      <div class="booking-history-card" onclick="openTicketFromHistory('${ticket.id}')">
-        <div class="history-card-header">
-          <span class="${activeHistoryTab === 'active' ? badgeClass : 'badge expired'}">
-            ${activeHistoryTab === 'active' ? badgeText : 'Expired'}
-          </span>
-          <span style="font-size:11px; font-weight:600; color:var(--text-secondary)">Rs ${(ticket.netPayable * ticket.quantity).toFixed(1)}</span>
+      <div style="background:#fff; border-radius:12px; margin: 16px; padding:16px; box-shadow:0 1px 8px rgba(0,0,0,0.06); font-family: 'Inter', sans-serif;" onclick="openTicketFromHistory('${ticket.id}')">
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#000;">TXN Date and Time</div>
+            <div style="font-size:12px; color:#444;">${txnDate}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px; color:#444;">Payment</div>
+            <div style="font-size:12px; color:#444;">Received</div>
+          </div>
         </div>
-        
-        <div class="history-route">
-          ${isSuman ? 'Suman Pravas Pass' : `${getShortStopName(ticket.fromStop)} <i class="fas fa-arrow-right" style="font-size:10px; color:var(--primary); margin:0 4px"></i> ${getShortStopName(ticket.toStop)}`}
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#000;">EXP Date and Time</div>
+            <div style="font-size:12px; color:#444;">${expDate}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:14px; color:#000;">₹ ${(ticket.netPayable * ticket.quantity).toFixed(1)}</div>
+          </div>
         </div>
-        
-        <div class="history-details">
-          <div><i class="far fa-clock"></i> ${timeStr} | ${dateStr}</div>
-          <div style="text-align:right"><i class="fas fa-ticket-alt"></i> ${ticket.ticketNo.substring(12)}</div>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#000;">Order ID</div>
+            <div style="font-size:12px; color:#444;">${orderId}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px; color:${statusColor};">${statusText}</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <div style="font-size:12px; font-weight:700; color:#000;">Ticket number</div>
+          <div style="font-size:12px; color:#444;">${ticket.ticketNo}</div>
+        </div>
+
+        <div style="border-top:1px solid #eee; margin:12px 0;"></div>
+
+        <div style="display:flex; align-items:flex-start;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; margin-top:2px; flex-shrink:0;">
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="6" r="3"></circle>
+            <line x1="8" y1="16" x2="16" y2="8"></line>
+          </svg>
+          <div style="font-size:11px; font-weight:700; color:#333; line-height:1.4;">
+            ${routeHtml}
+          </div>
         </div>
       </div>
     `;
