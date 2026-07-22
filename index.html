@@ -12,10 +12,14 @@
   <!-- Security & Content Policy Meta -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://*.tile.openstreetmap.org https://www.google.com https://*.google.com data: blob:;">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="orientation" content="portrait">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Surat Sitilink">
+
   <meta name="application-name" content="Surat Sitilink">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/icon.png?v=4">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png?v=4">
@@ -362,9 +366,8 @@
         </div>
         <div style="font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 6px;">Click on QR code to expand</div>
         <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
-        
-        <!-- Live Countdown display (01 : 59 : 50 format) -->
-        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 26px; font-weight: 700; color: #111; margin: 4px 0 0;">01 : 59 : 50</div>
+             <!-- Live Countdown display (01 : 59 : 50 format - 16px reduced by 10px) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 16px; font-weight: 700; color: #111; margin: 4px 0 0;">01 : 59 : 50</div>
       </div>
 
       <!-- Validity Pill Container -->
@@ -417,18 +420,18 @@
           </div>
         </div>
 
-
-        <!-- Transaction Date & Time Row -->
-        <div class="ticket-row-group">
-          <div>
-            <div class="ticket-info-label">Transaction Date</div>
-            <div class="ticket-info-value" id="displayTransDate">12/06/26</div>
-          </div>
-          <div style="text-align: right;">
-            <div class="ticket-info-label">Transaction Time</div>
-            <div class="ticket-info-value" id="displayTransTime">10:47:51</div>
-          </div>
+        <!-- Transaction Date Row (Line 1) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="ticket-info-label">Transaction Date</div>
+          <div class="ticket-info-value" id="displayTransDate">12/06/26</div>
         </div>
+
+        <!-- Transaction Time Row (Line 2) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="ticket-info-label">Transaction Time</div>
+          <div class="ticket-info-value" id="displayTransTime">10:47:51</div>
+        </div>
+div>
 
         <!-- Fare Breakdown -->
         <div class="fare-breakdown" style="padding-top: 4px;">

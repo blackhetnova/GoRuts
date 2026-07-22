@@ -112,15 +112,16 @@ function generateTicketQR(ticket) {
   document.getElementById('qrcode').innerHTML = '';
   document.getElementById('qrcodeBig').innerHTML = '';
   
-  // Render small QR
+  // Render small QR (width & height reduced by 10px to 130)
   qrcodeInstance = new QRCode(document.getElementById('qrcode'), {
     text: qrPayload,
-    width: 140,
-    height: 140,
+    width: 130,
+    height: 130,
     colorDark: "#111111",
     colorLight: "#ffffff",
     correctLevel: QRCode.CorrectLevel.M
   });
+
   
   // Render big modal QR
   qrcodeInstanceBig = new QRCode(document.getElementById('qrcodeBig'), {

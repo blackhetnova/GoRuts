@@ -990,6 +990,13 @@ body {
   background: var(--bg);
 }
 
+/* Prevent page reload & rotate gesture overscroll */
+html, body {
+  overscroll-behavior-y: contain !important;
+  overscroll-behavior: none !important;
+  touch-action: pan-x pan-y;
+}
+
 /* ============================== */
 /* TICKET SCREEN DESIGN           */
 /* ============================== */
@@ -999,13 +1006,14 @@ body {
   margin: 16px;
   margin-bottom: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .ticket-header {
   background: #ffffff !important;
   color: var(--primary) !important;
-  border-bottom: 1px solid var(--border) !important;
+  border-bottom: none !important;
   padding: 16px !important;
   text-align: center !important;
 }
@@ -1018,7 +1026,7 @@ body {
 .ticket-header.suman {
   background: #ffffff !important;
   color: var(--primary) !important;
-  border-bottom: 1px solid var(--border) !important;
+  border-bottom: none !important;
 }
 
 .ticket-status-title {
@@ -1049,13 +1057,13 @@ body {
 
 .ticket-qr-container {
   background: white;
-  padding: 12px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: none;
+  margin-bottom: 10px;
   display: inline-block;
   cursor: pointer;
-  border: 1px solid #eeeeee;
+  border: none;
 }
 
 #qrcode img {
@@ -1072,13 +1080,14 @@ body {
 }
 
 .ticket-timer-display {
-  font-size: 24px;
+  font-size: 16px !important; /* reduced by 10px */
   font-weight: 700;
   color: var(--text);
   letter-spacing: 1px;
-  margin: 2px 0 6px;
+  margin: 2px 0 4px;
   font-variant-numeric: tabular-nums;
 }
+
 
 .ticket-timer-display.expired {
   color: var(--danger);
