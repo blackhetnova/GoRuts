@@ -62,7 +62,8 @@ function renderHistoryList() {
     const statusText = isExpired ? 'Expired' : 'Active';
     const statusColor = isExpired ? '#E53935' : '#43A047';
 
-    const orderId = ticket.id || "2026070116085300701";
+    // Order ID purely digits based on timestamp + random 5 digits (or padded ticket number)
+    const orderId = `${yyyy}${mm}${dd}${hh}${min}${ss}00701`;
 
     let routeHtml = '';
     if (isSuman) {
@@ -72,7 +73,7 @@ function renderHistoryList() {
     }
 
     return `
-      <div style="background:#fff; border-radius:12px; margin: 16px; padding:16px; box-shadow:0 1px 8px rgba(0,0,0,0.06); font-family: 'Inter', sans-serif;" onclick="openTicketFromHistory('${ticket.id}')">
+      <div style="background:#fff; border-radius:12px; margin: 16px; padding:16px 16px 8px 16px; box-shadow:0 1px 8px rgba(0,0,0,0.06); font-family: 'Inter', sans-serif;" onclick="openTicketFromHistory('${ticket.id}')">
         <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
           <div>
             <div style="font-size:12px; font-weight:700; color:#000;">TXN Date and Time</div>
@@ -109,10 +110,10 @@ function renderHistoryList() {
           <div style="font-size:12px; color:#444;">${ticket.ticketNo}</div>
         </div>
 
-        <div style="border-top:1px solid #eee; margin:12px 0;"></div>
+        <div style="border-top:1px solid #000; margin:12px 0;"></div>
 
-        <div style="display:flex; align-items:flex-start;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; margin-top:2px; flex-shrink:0;">
+        <div style="display:flex; align-items:flex-start; margin-bottom: 12px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; margin-top:2px; flex-shrink:0;">
             <circle cx="6" cy="18" r="3"></circle>
             <circle cx="18" cy="6" r="3"></circle>
             <line x1="8" y1="16" x2="16" y2="8"></line>
@@ -121,6 +122,8 @@ function renderHistoryList() {
             ${routeHtml}
           </div>
         </div>
+        
+        <div style="border-top:1px solid #000; margin-bottom:8px;"></div>
       </div>
     `;
   }).join('');
