@@ -45,6 +45,7 @@
         </svg>
       </div>
       <div class="sitilink-user-name" id="userDisplayName">Panth</div>
+      <div class="sitilink-user-loc" id="userDisplayLoc" style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 2px;"><i class="fas fa-map-marker-alt"></i> Surat, Gujarat</div>
     </div>
     
     <div class="sitilink-menu-divider"></div>
@@ -110,6 +111,35 @@
         <i class="far fa-shield-alt"></i>
         <span>Privacy Policy</span>
       </button>
+
+      <!-- Settings Toggles -->
+      <div class="sitilink-menu-divider" style="margin: 8px 0;"></div>
+
+      <div class="sitilink-drawer-item" style="justify-content: space-between; cursor: default;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+        </div>
+        <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()"></div>
+      </div>
+
+      <div class="sitilink-drawer-item" style="justify-content: space-between; cursor: default;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <i class="fas fa-infinity"></i>
+          <span>Infinite Timer</span>
+        </div>
+        <div class="toggle-switch" id="infiniteTimerToggle" onclick="toggleInfiniteTimer()"></div>
+      </div>
+
+      <div class="sitilink-drawer-item" style="justify-content: space-between; cursor: default;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <i class="fas fa-language"></i>
+          <span>ગુજરાતી / English</span>
+        </div>
+        <div class="toggle-switch" id="langToggle" onclick="toggleLanguage()"></div>
+      </div>
+
+      <div class="sitilink-menu-divider" style="margin: 8px 0;"></div>
 
       <button class="sitilink-drawer-item" onclick="deleteAccount()">
         <i class="fas fa-user-slash"></i>
@@ -193,6 +223,14 @@
         <button class="show-route-btn" style="border-radius: 8px !important; font-weight: 600 !important; font-size: 15px !important; background: #3467bf !important;" onclick="proceedToPayment()">
           Show Route & Fare
         </button>
+      </div>
+    </div>
+
+    <!-- Quick Rebook Section -->
+    <div class="plan-trip-section" style="margin-top: 0; padding-top: 0;">
+      <h2 class="plan-trip-title" style="font-size: 15px; margin-bottom: 8px;">Recent Bookings</h2>
+      <div id="quickRebookList">
+        <!-- Filled programmatically by home.js -->
       </div>
     </div>
 
@@ -382,6 +420,10 @@
       <!-- Details Section (Second Box) -->
       <div class="ticket-details-section" style="padding-top: 12px;">
         <!-- Grey Description Pill (Placed in second box above stops) -->
+        <!-- Validation Status -->
+        <div id="displayValidationStatus" class="ticket-validity-status" style="text-align: center; font-weight: 700; font-size: 13px; margin-bottom: 6px;">Valid</div>
+        <div id="displayValidationDesc" style="text-align: center; font-size: 11px; color: #777; margin-bottom: 10px;">Ticket is active and valid for boarding</div>
+
         <div style="margin-bottom: 14px; text-align: center;">
           <div class="ticket-validity-pill" id="displayValidityNote">
             The validity period is 2 hours and the entry time is 15 minutes
@@ -411,8 +453,9 @@
             <div class="ticket-info-label" style="margin-bottom: 6px;">Passenger</div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
               <div>
-                <div style="font-size: 12px; font-weight: 500; color: #666; margin-bottom: 2px;">Adult</div>
+                <div style="font-size: 12px; font-weight: 500; color: #666; margin-bottom: 2px;" id="displayPassengerCat">Adult</div>
                 <div style="font-size: 14px; font-weight: 700; color: #111;" id="displayPassengerQtyVal">1</div>
+                <div style="font-size: 11px; color: #888; margin-top: 2px;" id="displayPassengerQty">1 Ticket</div>
               </div>
               <div style="text-align: right;">
                 <div style="font-size: 12px; font-weight: 500; color: #666; margin-bottom: 2px;">Total</div>
@@ -455,6 +498,42 @@
           <div class="fare-breakdown-row total">
             <span>Net Payable</span>
             <span class="price" id="displayNetPayable">₹ 8.0</span>
+          </div>
+        </div>
+
+        <!-- Simulator Controls -->
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #ddd;">
+          <div style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Simulator Controls</div>
+          
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 12px; color: #666; min-width: 60px;">Quantity:</label>
+            <select id="simPaxQty" style="flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333;">
+              <option value="1">1 Adult</option>
+              <option value="2">2 Adults</option>
+              <option value="3">3 Adults</option>
+              <option value="4">4 Adults</option>
+              <option value="5">5 Adults</option>
+            </select>
+            <button class="trip-action-btn filled" style="padding: 6px 12px; font-size: 11px; border-radius: 6px;" onclick="adjustPaxQty()">Apply</button>
+          </div>
+
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 12px; color: #666; min-width: 60px;">Time:</label>
+            <select id="simDateAdjust" onchange="adjustSimTimestamp()" style="flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333;">
+              <option value="current">Current Time</option>
+              <option value="yesterday">Yesterday (Expired)</option>
+              <option value="custom">Custom...</option>
+            </select>
+          </div>
+
+          <div id="simCustomTimeGroup" style="display: none; margin-bottom: 8px;">
+            <input type="datetime-local" id="simCustomDateTime" style="width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333; margin-bottom: 6px;">
+            <button class="trip-action-btn filled" style="width: 100%; padding: 6px 12px; font-size: 11px; border-radius: 6px;" onclick="applyCustomTimestamp()">Apply Custom Time</button>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="trip-action-btn outline" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 6px;" onclick="simulateSelfValidate()"><i class="fas fa-qrcode"></i> Validate</button>
+            <button class="trip-action-btn outline" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 6px; color: #e53935; border-color: #e53935;" onclick="simulateExpireTicket()"><i class="fas fa-times-circle"></i> Force Expire</button>
           </div>
         </div>
       </div>
@@ -717,6 +796,8 @@
   <div class="qr-modal" id="qrModal" onclick="closeFullQR()">
     <div class="qr-modal-card" onclick="event.stopPropagation()" style="background: white; padding: 18px; border-radius: 20px; display: inline-block;">
       <div id="qrcodeBig" style="margin: 0 auto; display: inline-block; padding: 4px; background: white; border-radius: 12px;"></div>
+      <div id="expandedTicketNo" style="font-size: 11px; color: #777; margin-top: 8px; font-family: monospace; letter-spacing: 0.5px; text-align: center;"></div>
+      <div id="gateScanStatus" style="font-size: 12px; font-weight: 600; margin-top: 8px; text-align: center; color: #666;"></div>
     </div>
   </div>
 

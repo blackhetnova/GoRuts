@@ -77,14 +77,6 @@ function navigateTo(pageId, pushToBrowserHistory = true) {
       };
     }
     renderTicketDetails(currentTicket);
-    // Always ensure the ticket is in a valid ticking state when viewing
-    if (currentTicket.status === 'expired' || !currentTicket.expiryTime || currentTicket.expiryTime <= Date.now()) {
-      currentTicket.status = 'valid';
-      currentTicket.expiryTime = Date.now() + (2 * 60 * 60 * 1000);
-      currentTicket.purchaseTime = Date.now();
-      saveHistoryToStorage();
-      renderTicketDetails(currentTicket);
-    }
 
   } else if (pageId === 'booking') {
     renderHistoryList();

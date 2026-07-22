@@ -47,12 +47,12 @@ function updateMapHighlight() {
   const activeLine = document.getElementById('activeTripLine');
   const busIcon = document.getElementById('mapBusIcon');
   
-  // Style resets
-  lineA.style.stroke = "var(--border)";
-  lineB.style.stroke = "var(--border)";
-  lineC.style.stroke = "var(--border)";
-  activeLine.setAttribute('d', '');
-  busIcon.style.display = "none";
+  // Style resets (lineA/B/C may not exist in current SVG layout)
+  if (lineA) lineA.style.stroke = "var(--border)";
+  if (lineB) lineB.style.stroke = "var(--border)";
+  if (lineC) lineC.style.stroke = "var(--border)";
+  if (activeLine) activeLine.setAttribute('d', '');
+  if (busIcon) busIcon.style.display = "none";
   
   // Reset nodes
   document.querySelectorAll('.map-station').forEach(node => {

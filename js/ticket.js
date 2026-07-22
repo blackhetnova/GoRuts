@@ -143,10 +143,15 @@ function startTicketTimer(ticket) {
   const timerDisplay = document.getElementById('displayCountdown');
   if (!timerDisplay || !ticket) return;
 
-  // Always ensure ticket has a valid future expiry so the timer ticks
-  if (!ticket.expiryTime || ticket.expiryTime <= Date.now()) {
-    ticket.expiryTime = Date.now() + (2 * 60 * 60 * 1000);
-    if (ticket.status === 'expired') ticket.status = 'valid';
+  // If ticket is already expired, show EXPIRED immediately without resetting
+  if (ticket.status === 'expired' || (ticket.expiryTime && ticket.expiryTime <= Date.now())) {
+    timerDisplay.textContent = 'EXPIRED';
+    timerDisplay.className = 'ticket-timer-display expired';
+    if (ticket.status !== 'expired') {
+      ticket.status = 'expired';
+      saveHistoryToStorage();
+    }
+    return;
   }
   
   function tick() {
