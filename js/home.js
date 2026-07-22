@@ -147,6 +147,7 @@ function generateTicketNumber() {
 // ─── Quick Rebook List (Home Screen) ────────────────────────────
 function quickRebookList() {
   const container = document.getElementById('quickRebookList');
+  if (!container) return;
   if (bookingHistory.length === 0) {
     container.innerHTML = `<div style="text-align:center; font-size:12px; color:var(--text-secondary); padding:10px 0;">No recent bookings found. Generate your first ticket!</div>`;
     return;
