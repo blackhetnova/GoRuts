@@ -202,18 +202,18 @@ body {
 }
 
 .search-bar {
-  background: #F5F5F5;
-  border: 1px solid #E6E8E7;
+  background: #FFFFFF;
+  border: none;
   border-radius: 12px !important;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 .search-bar-icon {
-  color: #9C9DA0;
+  color: #393B40;
   font-size: 16px;
 }
 
@@ -228,7 +228,7 @@ body {
 }
 
 .search-bar input::placeholder {
-  color: #B8B8B8;
+  color: #888888;
   font-weight: 400;
 }
 
@@ -269,7 +269,7 @@ body {
 
 /* Trip Input Fields - Fieldset style matching Sitilink app */
 .trip-field {
-  border: 1px solid #E6E8E7;
+  border: 1px solid #B0B0B0;
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 14px;
@@ -288,9 +288,9 @@ body {
   left: 12px;
   background: #FFFFFF;
   padding: 0 4px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
-  color: #B8B8B8;
+  color: #666666;
 }
 
 .trip-field-inner {
@@ -305,14 +305,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9C9DA0;
+  color: #393B40;
   font-size: 16px;
 }
 
 .trip-field-value {
   font-size: 15px;
-  font-weight: 400;
-  color: #B8B8B8;
+  font-weight: 600;
+  color: #393B40;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -332,14 +332,14 @@ body {
   width: 48px;
   height: 48px;
   background: #FFFFFF;
-  border: 1px solid #E6E8E7;
+  border: 1px solid #B0B0B0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   color: #393B40;
   transition: transform 0.2s ease, background 0.2s ease;
 }
@@ -461,7 +461,7 @@ body {
   padding: 8px 4px 10px;
   z-index: 1000;
   border-top: none;
-  box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
 }
 
 .nav-item {
