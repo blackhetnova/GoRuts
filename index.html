@@ -420,10 +420,6 @@
       <!-- Details Section (Second Box) -->
       <div class="ticket-details-section" style="padding-top: 12px;">
         <!-- Grey Description Pill (Placed in second box above stops) -->
-        <!-- Validation Status -->
-        <div id="displayValidationStatus" class="ticket-validity-status" style="text-align: center; font-weight: 700; font-size: 13px; margin-bottom: 6px;">Valid</div>
-        <div id="displayValidationDesc" style="text-align: center; font-size: 11px; color: #777; margin-bottom: 10px;">Ticket is active and valid for boarding</div>
-
         <div style="margin-bottom: 14px; text-align: center;">
           <div class="ticket-validity-pill" id="displayValidityNote">
             The validity period is 2 hours and the entry time is 15 minutes
@@ -455,7 +451,6 @@
               <div>
                 <div style="font-size: 12px; font-weight: 500; color: #666; margin-bottom: 2px;" id="displayPassengerCat">Adult</div>
                 <div style="font-size: 14px; font-weight: 700; color: #111;" id="displayPassengerQtyVal">1</div>
-                <div style="font-size: 11px; color: #888; margin-top: 2px;" id="displayPassengerQty">1 Ticket</div>
               </div>
               <div style="text-align: right;">
                 <div style="font-size: 12px; font-weight: 500; color: #666; margin-bottom: 2px;">Total</div>
@@ -498,42 +493,6 @@
           <div class="fare-breakdown-row total">
             <span>Net Payable</span>
             <span class="price" id="displayNetPayable">₹ 8.0</span>
-          </div>
-        </div>
-
-        <!-- Simulator Controls -->
-        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #ddd;">
-          <div style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">Simulator Controls</div>
-          
-          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
-            <label style="font-size: 12px; color: #666; min-width: 60px;">Quantity:</label>
-            <select id="simPaxQty" style="flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333;">
-              <option value="1">1 Adult</option>
-              <option value="2">2 Adults</option>
-              <option value="3">3 Adults</option>
-              <option value="4">4 Adults</option>
-              <option value="5">5 Adults</option>
-            </select>
-            <button class="trip-action-btn filled" style="padding: 6px 12px; font-size: 11px; border-radius: 6px;" onclick="adjustPaxQty()">Apply</button>
-          </div>
-
-          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
-            <label style="font-size: 12px; color: #666; min-width: 60px;">Time:</label>
-            <select id="simDateAdjust" onchange="adjustSimTimestamp()" style="flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333;">
-              <option value="current">Current Time</option>
-              <option value="yesterday">Yesterday (Expired)</option>
-              <option value="custom">Custom...</option>
-            </select>
-          </div>
-
-          <div id="simCustomTimeGroup" style="display: none; margin-bottom: 8px;">
-            <input type="datetime-local" id="simCustomDateTime" style="width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333; margin-bottom: 6px;">
-            <button class="trip-action-btn filled" style="width: 100%; padding: 6px 12px; font-size: 11px; border-radius: 6px;" onclick="applyCustomTimestamp()">Apply Custom Time</button>
-          </div>
-
-          <div style="display: flex; gap: 8px;">
-            <button class="trip-action-btn outline" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 6px;" onclick="simulateSelfValidate()"><i class="fas fa-qrcode"></i> Validate</button>
-            <button class="trip-action-btn outline" style="flex: 1; padding: 6px 10px; font-size: 11px; border-radius: 6px; color: #e53935; border-color: #e53935;" onclick="simulateExpireTicket()"><i class="fas fa-times-circle"></i> Force Expire</button>
           </div>
         </div>
       </div>
