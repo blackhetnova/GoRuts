@@ -358,23 +358,17 @@
 
     <!-- Live Ticket Visual Card -->
     <div class="ticket-wrapper" id="ticketVisualArea">
-      <!-- QR Section -->
-      <div class="ticket-qr-section">
+      <!-- QR Section (First Box) -->
+      <div class="ticket-qr-section" style="padding-bottom: 20px;">
         <div class="ticket-status-subtitle" id="ticketStatusSubtitle" style="font-size: 11px; color: #777; margin-bottom: 12px;">Scan at your boarding gate</div>
         <div class="ticket-qr-container" onclick="openFullQR()">
           <div id="qrcode"></div>
         </div>
         <div style="font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 6px;">Click on QR code to expand</div>
         <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
-             <!-- Live Countdown display (01 : 59 : 50 format - 16px reduced by 10px) -->
-        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 16px; font-weight: 700; color: #111; margin: 4px 0 0;">01 : 59 : 50</div>
-      </div>
-
-      <!-- Validity Pill Container -->
-      <div style="padding: 0 16px 16px; text-align: center;">
-        <div class="ticket-validity-pill" id="displayValidityNote">
-          The validity period is 2 hours and the entry time is 15 minutes
-        </div>
+        
+        <!-- Live Countdown display (Increased height by 8px: font-size 24px, margin 8px 0) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 24px; font-weight: 700; color: #111; margin: 8px 0; line-height: 28px;">01 : 59 : 50</div>
       </div>
 
       <!-- Separator cut-out -->
@@ -384,9 +378,16 @@
         <div class="ticket-divider-right"></div>
       </div>
 
-      <!-- Details Section -->
+      <!-- Details Section (Second Box) -->
       <div class="ticket-details-section">
-        <!-- Route Title -->
+        <!-- Grey Description Pill (Placed in second box above stops) -->
+        <div style="margin-bottom: 16px; text-align: center;">
+          <div class="ticket-validity-pill" id="displayValidityNote">
+            The validity period is 2 hours and the entry time is 15 minutes
+          </div>
+        </div>
+
+        <!-- Route Title (Stops) -->
         <div class="ticket-route-heading" id="displayRouteTitle">
           Select Source <i class="fas fa-long-arrow-alt-right" style="margin:0 4px; color:#555"></i> Select Destination
         </div>
@@ -420,8 +421,8 @@
           </div>
         </div>
 
-        <!-- Transaction Date Row (Line 1) -->
-        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
+        <!-- Transaction Date Row (Line 1 - no divider line between date and time) -->
+        <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: none !important; margin-bottom: 4px; padding-bottom: 4px;">
           <div class="ticket-info-label">Transaction Date</div>
           <div class="ticket-info-value" id="displayTransDate">12/06/26</div>
         </div>
@@ -431,7 +432,7 @@
           <div class="ticket-info-label">Transaction Time</div>
           <div class="ticket-info-value" id="displayTransTime">10:47:51</div>
         </div>
-div>
+
 
         <!-- Fare Breakdown -->
         <div class="fare-breakdown" style="padding-top: 4px;">
