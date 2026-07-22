@@ -1206,10 +1206,10 @@ html, body {
 }
 
 .ticket-route-heading {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
   text-align: center;
-  color: #666;
+  color: #333;
   margin-bottom: 14px;
   display: flex;
   align-items: center;
