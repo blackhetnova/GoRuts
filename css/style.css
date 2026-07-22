@@ -1115,10 +1115,11 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #000000 !important; /* solid black divider line */
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
+
 
 /* Dashed ticket separator */
 .ticket-divider-wrapper {
