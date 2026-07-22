@@ -367,8 +367,8 @@
         <div style="font-size: 11px; color: #888; margin-top: 6px; margin-bottom: 4px;">Click on QR code to expand</div>
         <div class="ticket-no" id="displayTicketNo" style="font-size: 11px; color: #777; font-family: sans-serif; letter-spacing: 0.5px;">7101000116300361</div>
         
-        <!-- Live Countdown display (Reduced height by 3px: 21px, margin 5px 0) -->
-        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 21px; font-weight: 700; color: #111; margin: 5px 0; line-height: 25px;">01 : 59 : 50</div>
+        <!-- Live Countdown display (Width reduced by 3px) -->
+        <div class="ticket-timer-display" id="displayCountdown" style="font-size: 18px; font-weight: 700; color: #111; margin: 4px 0; line-height: 22px; letter-spacing: 0.2px;">01 : 59 : 50</div>
       </div>
 
       <!-- Separator cut-out -->
@@ -421,17 +421,18 @@
           </div>
         </div>
 
-        <!-- Transaction Date Row (Line 1 - no bold on date value) -->
+        <!-- Transaction Date Row (Line 1 - color matches Total Fare value font) -->
         <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center; border-bottom: none !important; margin-bottom: 2px; padding-bottom: 2px;">
           <div class="ticket-info-label">Transaction Date</div>
-          <div class="ticket-info-value" id="displayTransDate" style="font-weight: 400 !important; color: #333;">12/06/26</div>
+          <div class="ticket-info-value" id="displayTransDate" style="font-weight: 500 !important; color: #111111 !important; font-size: 13px;">12/06/26</div>
         </div>
 
-        <!-- Transaction Time Row (Line 2 - no bold on time value) -->
+        <!-- Transaction Time Row (Line 2 - color matches Total Fare value font) -->
         <div class="ticket-row-group" style="display: flex; justify-content: space-between; align-items: center;">
           <div class="ticket-info-label">Transaction Time</div>
-          <div class="ticket-info-value" id="displayTransTime" style="font-weight: 400 !important; color: #333;">10:47:51</div>
+          <div class="ticket-info-value" id="displayTransTime" style="font-weight: 500 !important; color: #111111 !important; font-size: 13px;">10:47:51</div>
         </div>
+
 
 
 

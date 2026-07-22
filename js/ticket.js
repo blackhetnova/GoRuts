@@ -137,6 +137,7 @@ function generateTicketQR(ticket) {
 }
 
 // ─── Live Countdown Timer ───────────────────────────────────────
+// ─── Live Countdown Timer ───────────────────────────────────────
 function startTicketTimer(ticket) {
   if (countdownTimer) clearInterval(countdownTimer);
   
@@ -153,15 +154,28 @@ function startTicketTimer(ticket) {
       return;
     }
     
-    // Infinite simulator mode overrides expiry check
+    let diff = (ticket.expiryTime || (now + 7200000)) - now;
+    
+    // If infinite timer mode is enabled, calculate dynamic ticking loop starting from 01:59:50
     if (userPreferences.infiniteTimer) {
-      timerDisplay.textContent = '01 : 59 : 50';
+      const startTime = ticket.purchaseTime || (now - 1000);
+      const elapsedSecs = Math.floor((now - startTime) / 1000);
+      const baseSecs = (1 * 3600) + (59 * 60) + 50; // 01:59:50
+      let remaining = baseSecs - (elapsedSecs % baseSecs);
+      if (remaining <= 0) remaining = baseSecs;
+      
+      const hours = Math.floor(remaining / 3600);
+      const mins = Math.floor((remaining % 3600) / 60);
+      const secs = remaining % 60;
+      
+      const hStr = String(hours).padStart(2, '0');
+      const mStr = String(mins).padStart(2, '0');
+      const sStr = String(secs).padStart(2, '0');
+      
+      timerDisplay.textContent = `${hStr} : ${mStr} : ${sStr}`;
       timerDisplay.className = 'ticket-timer-display';
       return;
     }
-
-    
-    const diff = ticket.expiryTime - now;
     
     if (diff <= 0) {
       clearInterval(countdownTimer);
@@ -176,14 +190,14 @@ function startTicketTimer(ticket) {
       return;
     }
     
-    // Format timer
+    // Format live countdown
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
     
-    const hStr = hours < 10 ? '0' + hours : hours;
-    const mStr = mins < 10 ? '0' + mins : mins;
-    const sStr = secs < 10 ? '0' + secs : secs;
+    const hStr = String(hours).padStart(2, '0');
+    const mStr = String(mins).padStart(2, '0');
+    const sStr = String(secs).padStart(2, '0');
     
     timerDisplay.textContent = `${hStr} : ${mStr} : ${sStr}`;
     timerDisplay.className = 'ticket-timer-display';
@@ -192,6 +206,7 @@ function startTicketTimer(ticket) {
   tick();
   countdownTimer = setInterval(tick, 1000);
 }
+
 
 // ─── Expanded QR Modal ──────────────────────────────────────────
 function openFullQR() {
