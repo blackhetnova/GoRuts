@@ -143,9 +143,10 @@ function startTicketTimer(ticket) {
   const timerDisplay = document.getElementById('displayCountdown');
   if (!timerDisplay || !ticket) return;
 
-  // Ensure active ticket has a valid 2-hour future expiry time
-  if (!ticket.expiryTime || (ticket.status !== 'expired' && ticket.expiryTime <= Date.now())) {
+  // Always ensure ticket has a valid future expiry so the timer ticks
+  if (!ticket.expiryTime || ticket.expiryTime <= Date.now()) {
     ticket.expiryTime = Date.now() + (2 * 60 * 60 * 1000);
+    if (ticket.status === 'expired') ticket.status = 'valid';
   }
   
   function tick() {

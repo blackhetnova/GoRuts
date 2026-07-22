@@ -1185,10 +1185,11 @@ html, body {
 }
 
 #displayTransDate, #displayTransTime {
-  font-weight: 700 !important;
-  color: #111111 !important;
+  font-weight: 400 !important;
+  color: #111 !important;
   font-size: 13px !important;
 }
+
 
 
 
