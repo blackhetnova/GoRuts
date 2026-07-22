@@ -118,14 +118,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   border-bottom: none;
   box-shadow: none;
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
+}
+
+/* Make headers sticky ONLY on these specific pages */
+#page-booking .header,
+#page-map .header,
+#page-notifications .header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header h1 {
